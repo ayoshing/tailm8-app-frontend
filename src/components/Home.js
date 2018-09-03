@@ -5,14 +5,14 @@ import { Route, Link } from "react-router-dom";
 const Home = props => {
   return (
     <Fragment>
-      <div>Welcome to Tailm8!</div>
+      <div>Welcome to Tailm8! Where Pets Stay in Touch</div>
       <div>
-        <button>
-          <Link to={"/login"}>Login</Link>
-        </button>
-        <button>
-          <Link to={"/signup"}>Signup</Link>
-        </button>
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+        <Link to="/signup">
+          <button>Signup</button>
+        </Link>
       </div>
     </Fragment>
   );
