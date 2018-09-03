@@ -1,21 +1,17 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import logo from "./logo.svg";
+import { Route, Switch } from "react-router-dom";
+import indexRoutes from './routes/index.js';
+
 import "./App.css";
-import Home from "./components/Home";
-import LoginForm from "./components/LoginForm";
-import SignUpForm from "./components/SignUpForm";
-import Header from "./components/Header";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Route exact path={"/login"} component={LoginForm} />
-        <Route exact path={"/signup"} component={SignUpForm} />
-        <Route exact path={"/"} component={Home} />
-      </div>
+      <Switch>
+        {indexRoutes.map((prop, key) => {
+          return <Route path={prop.path} key={key} component={prop.component} />;
+        })}
+      </Switch>
     );
   }
 }
