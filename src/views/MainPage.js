@@ -15,14 +15,10 @@ export default class extends Component {
           alignItems='center'
           justify='center'
           direction='column'
-          style={{marginTop:200}}
           >
           <Grid item xs><LoginForm /></Grid>
           <Grid item xs>
-            <Button variant="outlined" color="primary" href="/login" style={{marginTop: 50 }}>Login Button</Button>
-          </Grid>
-          <Grid item xs>
-            <Button variant="contained" color="primary" href="/signup" style={{marginTop: 10}}>Create An Account</Button>
+            <Button variant="contained" color="primary" href="/signup" style={{marginTop: 50}}>Create An Account</Button>
           </Grid>
         </Grid>
       </div>

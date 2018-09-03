@@ -1,9 +1,9 @@
-import LoginPage from '../views/LoginPage'
+import SignUpPage from '../views/SignUpPage'
 import MainPage from '../views/MainPage'
 
 const indexRoutes = [
-  { path: '/login', name: 'LoginPage', component: LoginPage },
-  { path: '/', name: "Main", component: MainPage}
+  { path: '/signup', name: 'SignUpPage', component: SignUpPage },
+  { path: '/', name: "MainPage", component: MainPage},
 ]
 
 export default indexRoutes;

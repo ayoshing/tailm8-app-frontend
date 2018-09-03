@@ -9,6 +9,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
@@ -37,13 +39,20 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
 });
 
-class LoginForm extends React.Component {
+class SignUpForm extends React.Component {
 
   state = {
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    password2: '',
+    accountType: ''
   }
 
   handleChange = (e) => {
@@ -61,6 +70,16 @@ class LoginForm extends React.Component {
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <form className={classes.form}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Name</InputLabel>
+                <Input
+                  id="name"
+                  name="name"
+                  autoComplete="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                  autoFocus />
+              </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -82,6 +101,34 @@ class LoginForm extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password2">Confirm Password</InputLabel>
+                <Input
+                  name="password2"
+                  type="password2"
+                  id="password2"
+                  autoComplete="current-password"
+                  value={this.state.password2}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="accountType">Account Type</InputLabel>
+                <Select
+                  value={this.state.accountType}
+                  onChange={this.handleChange}
+                  inputProps={{
+                    name: 'accountType',
+                    id: 'accountType',
+                  }}
+                >
+                  <MenuItem value="Pet">
+                    <em>Pet (Default)</em>
+                  </MenuItem>
+                  <MenuItem value='business'>Business</MenuItem>
+                </Select>
+              </FormControl>
+
               <Button
                 type="submit"
                 fullWidth
@@ -89,7 +136,7 @@ class LoginForm extends React.Component {
                 color="primary"
                 className={classes.submit}
               >
-                Log In
+                Create Account
               </Button>
             </form>
           </Paper>
@@ -99,8 +146,8 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
+SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LoginForm);
+export default withStyles(styles)(SignUpForm);
