@@ -52,7 +52,6 @@ class SignUpForm extends React.Component {
     email: "",
     password: "",
     password2: "",
-    pwMatch: true,
     accountType: ""
   };
 

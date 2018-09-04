@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-class Newsfeed extends Component {
+class Postsfeed extends Component {
   render() {
     return <div />;
   }
 }
 
-export default Newsfeed;
+export default Postsfeed;

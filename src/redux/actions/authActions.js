@@ -5,6 +5,7 @@ const API_USERS_URL = "http://localhost:3001/api/users";
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
+// TODO: abstract fetches to UserAdapter
 export const signUpUser = (userData, history) => dispatch => {
   let config = {
     method: "POST",

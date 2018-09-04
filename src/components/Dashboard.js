@@ -6,6 +6,8 @@ class Dashboard extends Component {
   render() {
     return (
       <Fragment>
+        {/* if user does not have a profile, render ProfileForm otherwise render Postsfeed */}
+        {/* Speeddial component to create new Post */}
         <Navigation />
       </Fragment>
     );

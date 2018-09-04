@@ -33,9 +33,11 @@ class SimpleBottomNavigation extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        {/* Home button will render Newsfeed */}
+        <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
+        {/*  */}
+        <BottomNavigationAction label="Notifications" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Furiends" icon={<LocationOnIcon />} />
       </BottomNavigation>
     );
   }
