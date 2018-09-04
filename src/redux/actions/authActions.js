@@ -16,7 +16,14 @@ export const signUpUser = (userData, history) => dispatch => {
   };
 
   fetch(API_USERS_URL, config)
-    .then(res => history.push("/login"))
+    .then(res => {
+      let logInData = {
+        email: userData.email,
+        password: userData.password
+      };
+      logInUser(logInData, history)(dispatch);
+    })
+    // .then(res => history.push("/login"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -51,7 +58,7 @@ export const logInUser = (userData, history) => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response
       })
     );
 };

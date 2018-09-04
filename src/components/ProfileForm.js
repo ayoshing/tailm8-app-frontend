@@ -6,8 +6,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { createProfile } from "../redux/actions/authActions";
