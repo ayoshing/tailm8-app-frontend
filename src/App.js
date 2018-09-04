@@ -1,12 +1,20 @@
 import React, { Component, Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Header from "./components/Header";
 import indexRoutes from "./routes/index.js";
+import jwtDecode from "jwt-decode";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/actions/authActions";
 
 import "./App.css";
 
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (localStorage.jwt) {
+      let decodedJwt = jwtDecode(localStorage.jwt);
+      this.props.dispatch(setCurrentUser(decodedJwt));
+    }
+  }
 
   render() {
     return (
@@ -24,4 +32,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default withRouter(connect(mapStateToProps)(App));
