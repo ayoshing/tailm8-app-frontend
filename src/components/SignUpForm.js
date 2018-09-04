@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { connect } from 'react-redux';
+import { signUpUser } from '../redux/actions/authActions';
 
 const styles = theme => ({
   layout: {
@@ -52,13 +51,27 @@ class SignUpForm extends React.Component {
     email: '',
     password: '',
     password2: '',
-    accountType: ''
+    pwMatch: true,
+    accountType: '',
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      accountType: this.state.accountType
+    }
+
+    this.props.signUpUser(newUser);
   }
 
   render(){
@@ -105,7 +118,7 @@ class SignUpForm extends React.Component {
                 <InputLabel htmlFor="password2">Confirm Password</InputLabel>
                 <Input
                   name="password2"
-                  type="password2"
+                  type="password"
                   id="password2"
                   autoComplete="current-password"
                   value={this.state.password2}
@@ -135,6 +148,7 @@ class SignUpForm extends React.Component {
                 variant="outlined"
                 color="primary"
                 className={classes.submit}
+                onClick={this.handleClick}
               >
                 Create Account
               </Button>
@@ -150,4 +164,4 @@ SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignUpForm);
+export default connect(null, { signUpUser })(withStyles(styles)(SignUpForm));
