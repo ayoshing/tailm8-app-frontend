@@ -66,6 +66,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { errors } = this.state;
 
     return (
       <React.Fragment>
@@ -115,7 +116,9 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  logInUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
