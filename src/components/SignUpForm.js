@@ -11,6 +11,7 @@ import Select from '@material-ui/core/Select';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { signUpUser } from '../redux/actions/authActions';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
   layout: {
@@ -71,7 +72,7 @@ class SignUpForm extends React.Component {
       accountType: this.state.accountType
     }
 
-    this.props.signUpUser(newUser);
+    this.props.signUpUser(newUser, this.props.history);
   }
 
   render(){
@@ -162,6 +163,13 @@ class SignUpForm extends React.Component {
 
 SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  signUpUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { signUpUser })(withStyles(styles)(SignUpForm));
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+  errors: state.errors
+})
+
+export default connect(mapStateToProps, { signUpUser })(withStyles(styles)(withRouter(SignUpForm)));
