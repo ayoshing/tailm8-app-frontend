@@ -1,5 +1,5 @@
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
-import decodeJwt from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const API_USERS_URL = "http://localhost:3001/api/users";
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
@@ -42,11 +42,10 @@ export const logInUser = (userData, history) => dispatch => {
     })
     .then(json => {
       const { token } = json;
-      console.log("token", token);
       localStorage.setItem("jwt", token);
-      const decodedJwt = decodeJwt(token);
-      console.log("decoded", decodedJwt);
+      const decodedJwt = jwtDecode(token);
       dispatch(setCurrentUser(decodedJwt));
+      history.push("/");
     })
     .catch(err =>
       dispatch({
@@ -61,4 +60,32 @@ export const setCurrentUser = decodedJwt => {
     type: SET_CURRENT_USER,
     payload: decodedJwt
   };
+};
+
+export const createProfile = (profileData, history) => dispatch => {
+  let jwt = localStorage.jwt;
+
+  let config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: jwt
+    },
+    body: JSON.stringify({ profileData })
+  };
+
+  fetch(API_PROFILE_URL, config)
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Profile Error");
+    })
+    .then(json => history.push("/"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
