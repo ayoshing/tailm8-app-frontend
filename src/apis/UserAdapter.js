@@ -7,6 +7,7 @@ export default class UserAdapter {
     return localStorage.removeItem("jwt");
   }
 
+  // can replace this by checking redux store for isAuthenticated
   static isLoggedIn() {
     return !!UserAdapter.getToken();
   }
