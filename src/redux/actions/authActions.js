@@ -1,4 +1,5 @@
-import { GET_ERRORS } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import decodeJwt from "jwt-decode";
 
 const API_USERS_URL = "http://localhost:3001/api/users";
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
@@ -23,7 +24,7 @@ export const signUpUser = (userData, history) => dispatch => {
     );
 };
 
-export const logInUser = userData => dispatch => {
+export const logInUser = (userData, history) => dispatch => {
   let config = {
     method: "POST",
     headers: {
@@ -41,7 +42,11 @@ export const logInUser = userData => dispatch => {
     })
     .then(json => {
       const { token } = json;
+      console.log("token", token);
       localStorage.setItem("jwt", token);
+      const decodedJwt = decodeJwt(token);
+      console.log("decoded", decodedJwt);
+      dispatch(setCurrentUser(decodedJwt));
     })
     .catch(err =>
       dispatch({
@@ -49,4 +54,11 @@ export const logInUser = userData => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+export const setCurrentUser = decodedJwt => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decodedJwt
+  };
 };
