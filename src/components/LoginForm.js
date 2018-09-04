@@ -123,7 +123,7 @@ LoginForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    auth: state.authReducer,
+    auth: state.auth,
     errors: state.errors
   };
 };

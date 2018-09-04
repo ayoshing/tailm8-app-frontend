@@ -1,68 +1,68 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Paper from '@material-ui/core/Paper';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { connect } from 'react-redux';
-import { signUpUser } from '../redux/actions/authActions';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import Paper from "@material-ui/core/Paper";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import withStyles from "@material-ui/core/styles/withStyles";
+import { connect } from "react-redux";
+import { signUpUser } from "../redux/actions/authActions";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   layout: {
-    width: 'auto',
-    display: 'block', // Fix IE11 issue.
+    width: "auto",
+    display: "block", // Fix IE11 issue.
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px`
   },
   form: {
-    width: '100%', // Fix IE11 issue.
-    marginTop: theme.spacing.unit,
+    width: "100%", // Fix IE11 issue.
+    marginTop: theme.spacing.unit
   },
   submit: {
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 3
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
-  },
+    minWidth: 120
+  }
 });
 
 class SignUpForm extends React.Component {
-
   state = {
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
     pwMatch: true,
-    accountType: '',
-  }
+    accountType: ""
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
 
-  handleClick = (e) => {
+  handleClick = e => {
     e.preventDefault();
 
     const newUser = {
@@ -70,12 +70,12 @@ class SignUpForm extends React.Component {
       email: this.state.email,
       password: this.state.password,
       accountType: this.state.accountType
-    }
+    };
 
     this.props.signUpUser(newUser, this.props.history);
-  }
+  };
 
-  render(){
+  render() {
     const { classes } = this.props;
 
     return (
@@ -92,8 +92,10 @@ class SignUpForm extends React.Component {
                   autoComplete="name"
                   value={this.state.name}
                   onChange={this.handleChange}
-                  autoFocus />
+                  autoFocus
+                />
               </FormControl>
+
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -102,8 +104,9 @@ class SignUpForm extends React.Component {
                   autoComplete="email"
                   value={this.state.email}
                   onChange={this.handleChange}
-                  autoFocus />
+                />
               </FormControl>
+
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
@@ -115,6 +118,7 @@ class SignUpForm extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
+
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password2">Confirm Password</InputLabel>
                 <Input
@@ -126,20 +130,21 @@ class SignUpForm extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
+
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="accountType">Account Type</InputLabel>
                 <Select
                   value={this.state.accountType}
                   onChange={this.handleChange}
                   inputProps={{
-                    name: 'accountType',
-                    id: 'accountType',
+                    name: "accountType",
+                    id: "accountType"
                   }}
                 >
                   <MenuItem value="Pet">
                     <em>Pet (Default)</em>
                   </MenuItem>
-                  <MenuItem value='business'>Business</MenuItem>
+                  <MenuItem value="Business">Business</MenuItem>
                 </Select>
               </FormControl>
 
@@ -167,9 +172,14 @@ SignUpForm.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.authReducer,
+const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, { signUpUser })(withStyles(styles)(withRouter(SignUpForm)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { signUpUser }
+  )(withStyles(styles)(SignUpForm))
+);
