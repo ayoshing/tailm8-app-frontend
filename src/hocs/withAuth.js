@@ -17,7 +17,7 @@ const withAuth = WrappedComponent => {
       } else if (localStorage.jwt && this.props.profile.loading) {
         return <div>LOADING</div>;
       } else {
-        return <Redirect to="/login" />;
+        return <Redirect to="/" />;
       }
     }
   }

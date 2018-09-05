@@ -1,14 +1,25 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
-import { getProfileAction } from "../redux/actions/profileActions";
+import { getCurrentProfileAction } from "../redux/actions/profileActions";
+import ProfileForm from "./ProfileForm";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.getCurrentProfileAction(this.props.auth.user.id);
+  }
+
   render() {
-    console.log(this.props.profile, this.props.auth);
+    const isEmpty = value =>
+      value === undefined ||
+      value === null ||
+      (typeof value === "object" && Object.keys(value).length === 0) ||
+      (typeof value === "string" && value.trim().length === 0);
+
+    console.log(this.props);
     return (
       <Fragment>
-        {/* if user does not have a profile, render ProfileForm otherwise render Postsfeed */}
+        {isEmpty(this.props.profile.profile) ? <ProfileForm /> : null}
         {/* Speeddial component to create new Post */}
         <Navigation />
       </Fragment>
@@ -24,5 +35,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfileAction }
+  { getCurrentProfileAction }
 )(Dashboard);
