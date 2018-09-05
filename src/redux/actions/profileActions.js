@@ -1,4 +1,9 @@
-import { GET_ERRORS, GET_PROFILE, PROFILE_LOADING } from "./types";
+import {
+  GET_ERRORS,
+  GET_PROFILE,
+  PROFILE_LOADING,
+  RESET_PROFILE
+} from "./types";
 
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
 
@@ -68,5 +73,11 @@ export const getCurrentProfileAction = userId => dispatch => {
 export const profileLoadingAction = () => {
   return {
     type: PROFILE_LOADING
+  };
+};
+
+export const resetProfileAction = () => {
+  return {
+    type: RESET_PROFILE
   };
 };
