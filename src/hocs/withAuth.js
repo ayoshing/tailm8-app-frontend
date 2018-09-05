@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCurrentUser } from "../redux/actions/authActions";
+import { getCurrentProfileAction } from "../redux/actions/profileActions";
 
 const withAuth = WrappedComponent => {
   class AuthComponent extends Component {
     componentDidMount() {
       if (localStorage.jwt && !this.props.auth.isAuthenticated) {
         this.props.getCurrentUser();
+        this.props.getCurrentProfileAction(this.props.auth.user.id);
       }
     }
 
@@ -24,7 +26,7 @@ const withAuth = WrappedComponent => {
 
   return connect(
     mapStateToProps,
-    { getCurrentUser }
+    { getCurrentUser, getCurrentProfileAction }
   )(AuthComponent);
 };
 
