@@ -1,3 +1,5 @@
+const API_PROFILE_URL = "http://localhost:3001/api/profile";
+
 export default class UserAdapter {
   static getToken() {
     return localStorage.jwt;
@@ -7,8 +9,11 @@ export default class UserAdapter {
     return localStorage.removeItem("jwt");
   }
 
-  // can replace this by checking redux store for isAuthenticated
   static isLoggedIn() {
     return !!UserAdapter.getToken();
+  }
+
+  static getUserProfile(userId) {
+    return fetch(`${API_PROFILE_URL}/users/${userId}`).then(res => res.json());
   }
 }

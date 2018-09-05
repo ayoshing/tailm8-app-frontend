@@ -45,10 +45,9 @@ function SimpleAppBar(props) {
               </Link>
             </Grid>
             <Grid item>
-              {props.auth.isAuthenticated ? (
+              {UserAdapter.isLoggedIn() ? (
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  color="inherit"
                   justify="flex-end"
                   onClick={() => handleClick(props)}
                 >

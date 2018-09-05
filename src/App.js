@@ -9,13 +9,6 @@ import { setCurrentUser } from "./redux/actions/authActions";
 import "./App.css";
 
 class App extends Component {
-  componentDidMount() {
-    if (localStorage.jwt) {
-      let decodedJwt = jwtDecode(localStorage.jwt);
-      this.props.dispatch(setCurrentUser(decodedJwt));
-    }
-  }
-
   render() {
     return (
       <Fragment>

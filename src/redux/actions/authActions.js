@@ -1,8 +1,8 @@
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import jwtDecode from "jwt-decode";
+import UserAdapter from "../../apis/UserAdapter";
 
 const API_USERS_URL = "http://localhost:3001/api/users";
-const API_PROFILE_URL = "http://localhost:3001/api/profile";
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
 // TODO: abstract fetches to UserAdapter
@@ -16,14 +16,7 @@ export const signUpUser = (userData, history) => dispatch => {
   };
 
   fetch(API_USERS_URL, config)
-    .then(res => {
-      let logInData = {
-        email: userData.email,
-        password: userData.password
-      };
-      logInUser(logInData, history)(dispatch);
-    })
-    // .then(res => history.push("/login"))
+    .then(res => history.push("/login"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -63,37 +56,28 @@ export const logInUser = (userData, history) => dispatch => {
     );
 };
 
-export const setCurrentUser = decodedJwt => {
-  return {
-    type: SET_CURRENT_USER,
-    payload: decodedJwt
-  };
-};
-
-export const createProfile = (profileData, history) => dispatch => {
-  let jwt = localStorage.jwt;
-
+export const getCurrentUser = () => dispatch => {
   let config = {
-    method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: jwt
-    },
-    body: JSON.stringify({ profileData })
+      Authorization: UserAdapter.getToken()
+    }
   };
 
-  fetch(API_PROFILE_URL, config)
+  fetch(`${API_USERS_URL}/current`, config)
     .then(res => {
       if (res.ok) {
         return res.json();
       }
-      throw new Error("Profile Error");
+      throw new Error("Can't fetch current user");
     })
-    .then(json => history.push("/"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    .then(json => dispatch(setCurrentUser(json)));
+};
+
+export const setCurrentUser = decodedJwt => {
+  console.log(decodedJwt);
+  return {
+    type: SET_CURRENT_USER,
+    payload: decodedJwt
+  };
 };

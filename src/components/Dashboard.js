@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
+import { getProfileAction } from "../redux/actions/profileActions";
 
 class Dashboard extends Component {
   render() {
@@ -16,7 +17,11 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  { getProfileAction }
+)(Dashboard);

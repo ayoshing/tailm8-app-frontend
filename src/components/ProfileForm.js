@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
-import { createProfile } from "../redux/actions/authActions";
+import { createProfile } from "../redux/actions/profileActions";
 import { withRouter } from "react-router-dom";
 import DatePickers from "./DatePickers";
 import GenderRadioButton from "./GenderRadioButton";
