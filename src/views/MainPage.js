@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import UserAdapter from "../apis/UserAdapter";
 import Dashboard from "../components/Dashboard";
 import LandingPage from "./LandingPage";
+import withAuth from "../hocs/withAuth";
+
+const AuthedDashboard = withAuth(Dashboard);
 
 export default class extends Component {
   render() {
     return (
-      <div>{UserAdapter.isLoggedIn() ? <Dashboard /> : <LandingPage />}</div>
+      <div>{localStorage.jwt ? <AuthedDashboard /> : <LandingPage />}</div>
     );
   }
 }

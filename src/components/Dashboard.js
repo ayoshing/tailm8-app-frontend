@@ -5,6 +5,7 @@ import { getProfileAction } from "../redux/actions/profileActions";
 
 class Dashboard extends Component {
   render() {
+    console.log(this.props.profile, this.props.auth);
     return (
       <Fragment>
         {/* if user does not have a profile, render ProfileForm otherwise render Postsfeed */}

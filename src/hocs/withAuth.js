@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import UserAdapter from "../apis/UserAdapter";
 import { getCurrentUser } from "../redux/actions/authActions";
 
 const withAuth = WrappedComponent => {
   class AuthComponent extends Component {
     componentDidMount() {
-      if (UserAdapter.isLoggedIn && !this.props.auth.isAuthenticated) {
+      if (localStorage.jwt && !this.props.auth.isAuthenticated) {
         this.props.getCurrentUser();
       }
     }
 
     render() {
-      if (UserAdapter.isLoggedIn() && this.props.auth.isAuthenticated) {
+      if (localStorage.jwt && this.props.auth.isAuthenticated) {
         return <WrappedComponent {...this.props} />;
-      } else if (UserAdapter.isLoggedIn() && this.props.profile.loading) {
+      } else if (localStorage.jwt && this.props.profile.loading) {
         return <div>LOADING</div>;
       } else {
         return <Redirect to="/login" />;
@@ -35,4 +34,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default witAuth;
+export default withAuth;

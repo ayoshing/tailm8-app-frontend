@@ -1,11 +1,9 @@
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import jwtDecode from "jwt-decode";
-import UserAdapter from "../../apis/UserAdapter";
 
 const API_USERS_URL = "http://localhost:3001/api/users";
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
-// TODO: abstract fetches to UserAdapter
 export const signUpUser = (userData, history) => dispatch => {
   let config = {
     method: "POST",
@@ -60,7 +58,7 @@ export const getCurrentUser = () => dispatch => {
   let config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: UserAdapter.getToken()
+      Authorization: localStorage.jwt
     }
   };
 
@@ -75,7 +73,6 @@ export const getCurrentUser = () => dispatch => {
 };
 
 export const setCurrentUser = decodedJwt => {
-  console.log(decodedJwt);
   return {
     type: SET_CURRENT_USER,
     payload: decodedJwt

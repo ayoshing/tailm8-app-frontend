@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
-import UserAdapter from "../apis/UserAdapter";
 import { LOGOUT_CURRENT_USER } from "../redux/actions/types";
 
 const styles = {
@@ -19,7 +18,7 @@ const styles = {
 
 const handleClick = props => {
   props.dispatch({ type: LOGOUT_CURRENT_USER });
-  UserAdapter.clearToken();
+  localStorage.removeItem("jwt");
   props.history.push("/");
 };
 
@@ -45,7 +44,7 @@ function SimpleAppBar(props) {
               </Link>
             </Grid>
             <Grid item>
-              {UserAdapter.isLoggedIn() ? (
+              {localStorage.jwt ? (
                 <Button
                   color="inherit"
                   justify="flex-end"
@@ -68,6 +67,7 @@ SimpleAppBar.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
   errors: state.errors
 });
 

@@ -1,5 +1,4 @@
 import { GET_ERRORS, GET_PROFILE } from "./types";
-import UserAdapter from "../../apis/UserAdapter";
 
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
 
@@ -31,6 +30,8 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
-export const getProfileAction = () => dispatch => {
-  UserAdapter.getUserProfile().then(json => console.log(json));
+export const getProfileAction = userId => dispatch => {
+  fetch(`${API_PROFILE_URL}/users/${userId}`)
+    .then(res => res.json())
+    .then(json => console.log(json));
 };
