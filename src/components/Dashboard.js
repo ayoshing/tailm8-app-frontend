@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import { getCurrentProfileAction } from "../redux/actions/profileActions";
 import ProfileForm from "./ProfileForm";
+import SpeedDials from "./SpeedDials";
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.getCurrentProfileAction(this.props.auth.user.id);
-  }
+  componentDidMount() {}
 
   render() {
     const isEmpty = value =>
@@ -19,8 +18,12 @@ class Dashboard extends Component {
     console.log(this.props);
     return (
       <Fragment>
-        {isEmpty(this.props.profile.profile) ? <ProfileForm /> : null}
-        {/* Speeddial component to create new Post */}
+        {/* {isEmpty(this.props.profile.profile) ? <ProfileForm /> : null} */}
+        {isEmpty(this.props.profile.profile) ? (
+          <h2>You Don't Have a Profile</h2>
+        ) : null}
+
+        <SpeedDials />
         <Navigation />
       </Fragment>
     );

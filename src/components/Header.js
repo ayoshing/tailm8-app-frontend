@@ -7,8 +7,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
-import { LOGOUT_CURRENT_USER } from "../redux/actions/types";
+import { logOutUserAction } from "../redux/actions/authActions";
+import { resetProfileAction } from "../redux/actions/profileActions";
 
 const styles = {
   root: {
@@ -17,7 +20,8 @@ const styles = {
 };
 
 const handleClick = props => {
-  props.dispatch({ type: LOGOUT_CURRENT_USER });
+  props.logOutUserAction();
+  props.resetProfileAction();
   localStorage.removeItem("jwt");
   props.history.push("/");
 };
@@ -36,6 +40,13 @@ function SimpleAppBar(props) {
             justify="space-between"
             direction="row"
           >
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton>
             <Grid item>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <Typography variant="subheading" color="inherit">
@@ -72,5 +83,8 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps)(withStyles(styles)(SimpleAppBar))
+  connect(
+    mapStateToProps,
+    { logOutUserAction, resetProfileAction }
+  )(withStyles(styles)(SimpleAppBar))
 );

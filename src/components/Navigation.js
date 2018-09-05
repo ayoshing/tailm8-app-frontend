@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
+import HomeIcon from "@material-ui/icons/Home";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const styles = {
   root: {
-    width: "100%"
+    width: "100%",
+    position: "fixed",
+    bottom: 0
   }
 };
 
@@ -34,10 +36,13 @@ class SimpleBottomNavigation extends React.Component {
         className={classes.root}
       >
         {/* Home button will render Newsfeed */}
-        <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         {/*  */}
-        <BottomNavigationAction label="Notifications" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Furiends" icon={<LocationOnIcon />} />
+        <BottomNavigationAction
+          label="Notifications"
+          icon={<NotificationsIcon />}
+        />
+        <BottomNavigationAction label="Furiends" icon={<FavoriteIcon />} />
       </BottomNavigation>
     );
   }

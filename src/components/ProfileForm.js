@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import DatePickers from "./DatePickers";
 import GenderRadioButton from "./GenderRadioButton";
 import PhoneTextField from "./PhoneTextField";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   layout: {
@@ -106,11 +107,23 @@ class ProfileForm extends React.Component {
   render() {
     const { classes } = this.props;
 
+    const isEmpty = value =>
+      value === undefined ||
+      value === null ||
+      (typeof value === "object" && Object.keys(value).length === 0) ||
+      (typeof value === "string" && value.trim().length === 0);
+
     return (
       <React.Fragment>
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
+            {isEmpty(this.props.profile.profile) ? (
+              <Typography variant="headline">Create Profile</Typography>
+            ) : (
+              <Typography variant="headline">Edit Profile</Typography>
+            )}
+
             <form className={classes.form}>
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="email">Pet's Name</InputLabel>
@@ -217,11 +230,13 @@ class ProfileForm extends React.Component {
 
 ProfileForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
   errors: state.errors
 });
 
