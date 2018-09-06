@@ -13,7 +13,8 @@ import { connect } from "react-redux";
 import {
   clickedPostDial,
   clickedChatDial,
-  clickedEventDial
+  clickedEventDial,
+  openDialogAction
 } from "../redux/actions/postActions";
 
 const styles = theme => ({
@@ -21,7 +22,7 @@ const styles = theme => ({
     height: 380
   },
   speedDial: {
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing.unit * 7,
     right: theme.spacing.unit * 3
   }
@@ -55,7 +56,7 @@ class SpeedDials extends React.Component {
   handleClickAction = dialAction => {
     switch (dialAction) {
       case "Post":
-        this.props.postDialog();
+        this.props.openDialogAction();
         this.props.postDial(dialAction);
       case "Chat":
         this.props.chatDial(dialAction);
@@ -89,7 +90,6 @@ class SpeedDials extends React.Component {
 
     return (
       <div className={classes.root}>
-        {/* <Button onClick={this.handleVisibility}>Toggle Speed Dial</Button> */}
         <SpeedDial
           ariaLabel="SpeedDial"
           className={classes.speedDial}
@@ -120,21 +120,15 @@ class SpeedDials extends React.Component {
 SpeedDials.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile,
-  post: state.post,
-  errors: state.errors
-});
-
-const mapDispatchToProps = dispatch => ({
-  postDial: dialAction => dispatch(clickedPostDial(dialAction)),
-  chatDial: dialAction => dispatch(clickedChatDial(dialAction)),
-  eventDial: dialAction => dispatch(clickedEventDial(dialAction))
-});
+//
+// const mapStateToProps = state => ({
+//   auth: state.auth,
+//   profile: state.profile,
+//   post: state.post,
+//   errors: state.errors
+// });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  null,
+  { clickedPostDial, clickedChatDial, clickedEventDial, openDialogAction }
 )(withStyles(styles)(SpeedDials));

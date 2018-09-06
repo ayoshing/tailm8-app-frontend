@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 import TestPage from "../views/TestPage";
 import ProfileForm from "./ProfileForm";
 import Loading from "./Loading";
+import SpeedDials from "./SpeedDials";
 
 class Dashboard extends Component {
   isEmpty = value =>
@@ -38,6 +39,7 @@ class Dashboard extends Component {
 
         <SnackBar />
         <PostDialog />
+        <SpeedDials />
         <Navigation />
       </Fragment>
     );

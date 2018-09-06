@@ -7,22 +7,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
-import SpeedDials from "./SpeedDials";
-import { createPostAction } from "../redux/actions/postActions";
+import {
+  createPostAction,
+  closeDialogAction
+} from "../redux/actions/postActions";
 import { withRouter } from "react-router-dom";
 
 class PostDialog extends React.Component {
   state = {
-    open: false,
     content: ""
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
   };
 
   handleChange = e => {
@@ -38,15 +31,18 @@ class PostDialog extends React.Component {
     };
 
     this.props.createPostAction(postData, this.props.history);
-    this.setState({ open: false });
+    this.props.closeDialogAction();
+  };
+
+  handleClose = () => {
+    this.props.closeDialogAction();
   };
 
   render() {
     return (
       <div style={{ width: "100%" }}>
-        {/* <Button onClick={this.handleClickOpen}>Open form dialog</Button> */}
         <Dialog
-          open={this.state.open}
+          open={this.props.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           maxWidth="lg"
@@ -75,19 +71,18 @@ class PostDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <SpeedDials postDialog={this.handleClickOpen} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  post: state.post
+  open: state.post.dialogOpen
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { createPostAction }
+    { createPostAction, closeDialogAction }
   )(PostDialog)
 );

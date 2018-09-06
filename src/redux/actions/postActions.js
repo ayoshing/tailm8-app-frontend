@@ -90,14 +90,14 @@ export const closeSnackBarAction = () => {
   };
 };
 
-// export const openDialogAction = () => {
-//   return {
-//     type: OPEN_POST_DIALOG,
-//   }
-// }
-//
-// export const closeDialogAction = () => {
-//   return {
-//     type: CLOSE_POST_DIALOG,
-//   }
-// }
+export const openDialogAction = () => {
+  return {
+    type: OPEN_POST_DIALOG
+  };
+};
+
+export const closeDialogAction = () => {
+  return {
+    type: CLOSE_POST_DIALOG
+  };
+};

@@ -53,6 +53,16 @@ export default function(state = initialState, action) {
         ...state,
         snackBarOpen: false
       };
+    case OPEN_POST_DIALOG:
+      return {
+        ...state,
+        dialogOpen: true
+      };
+    case CLOSE_POST_DIALOG:
+      return {
+        ...state,
+        dialogOpen: false
+      };
     default:
       return state;
   }
