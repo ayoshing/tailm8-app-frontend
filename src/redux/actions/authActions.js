@@ -45,8 +45,9 @@ export const logInUser = (userData, history) => dispatch => {
       const decodedJwt = jwtDecode(token);
       dispatch(setCurrentUser(decodedJwt));
       dispatch(getCurrentProfileAction(decodedJwt.id));
-      history.push("/profile/edit");
+      // history.push("/");
     })
+    .then(json => history.push("/"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

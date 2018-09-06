@@ -1,13 +1,24 @@
 import {
-  GET_ALL_POSTS,
+  GET_ERRORS,
   CLICKED_CHAT_DIAL,
   CLICKED_POST_DIAL,
-  CLICKED_EVENT_DIAL
+  CLICKED_EVENT_DIAL,
+  GET_ALL_POSTS,
+  OPEN_POST_SNACKBAR,
+  CLOSE_POST_SNACKBAR,
+  OPEN_POST_DIALOG,
+  CLOSE_POST_DIALOG
 } from "../actions/types";
 
 const initialState = {
   posts: [],
-  dialAction: ""
+  dialAction: "",
+  isPosted: false,
+  snackBarOpen: false,
+  snackBarVertical: "bottom",
+  snackBarHorizontal: "left",
+  snackBarMsg: "Post Success!",
+  dialogOpen: false
 };
 
 export default function(state = initialState, action) {
@@ -31,6 +42,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: [...state.posts, action.payload]
+      };
+    case OPEN_POST_SNACKBAR:
+      return {
+        ...state,
+        snackBarOpen: true
+      };
+    case CLOSE_POST_SNACKBAR:
+      return {
+        ...state,
+        snackBarOpen: false
       };
     default:
       return state;

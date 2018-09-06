@@ -2,12 +2,17 @@ import {
   GET_ERRORS,
   CLICKED_CHAT_DIAL,
   CLICKED_POST_DIAL,
-  CLICKED_EVENT_DIAL
+  CLICKED_EVENT_DIAL,
+  GET_ALL_POSTS,
+  OPEN_POST_SNACKBAR,
+  CLOSE_POST_SNACKBAR,
+  OPEN_POST_DIALOG,
+  CLOSE_POST_DIALOG
 } from "./types";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
-export const createPost = (postData, history) => dispatch => {
+export const createPostAction = (postData, history) => dispatch => {
   let config = {
     method: "POST",
     headers: {
@@ -25,15 +30,31 @@ export const createPost = (postData, history) => dispatch => {
       throw new Error("Post Error");
     })
     .then(json => {
-      dispatch({});
+      dispatch(openSnackBarAction());
       history.push("/");
+    });
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response
+  //   })
+  // );
+};
+
+export const getPostsAction = () => dispatch => {
+  fetch(API_POSTS_URL)
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Unable To Get Posts");
     })
-    .catch(err =>
+    .then(json => {
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+        type: GET_ALL_POSTS,
+        payload: json
+      });
+    });
 };
 
 export const clickedPostDial = dialAction => {
@@ -56,3 +77,27 @@ export const clickedEventDial = dialAction => {
     payload: dialAction
   };
 };
+
+export const openSnackBarAction = () => {
+  return {
+    type: OPEN_POST_SNACKBAR
+  };
+};
+
+export const closeSnackBarAction = () => {
+  return {
+    type: CLOSE_POST_SNACKBAR
+  };
+};
+
+// export const openDialogAction = () => {
+//   return {
+//     type: OPEN_POST_DIALOG,
+//   }
+// }
+//
+// export const closeDialogAction = () => {
+//   return {
+//     type: CLOSE_POST_DIALOG,
+//   }
+// }
