@@ -1,21 +1,41 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import SnackBar from "./SnackBar";
 import PostDialog from "./PostDialog";
 import Navigation from "./Navigation";
 import TestPage from "../views/TestPage";
-import { Redirect } from "react-router-dom";
+import ProfileForm from "./ProfileForm";
+import Loading from "./Loading";
 
 class Dashboard extends Component {
-  render() {
-    const isEmpty = value =>
-      value === undefined ||
-      value === null ||
-      (typeof value === "object" && Object.keys(value).length === 0) ||
-      (typeof value === "string" && value.trim().length === 0);
+  isEmpty = value =>
+    value === undefined ||
+    value === null ||
+    (typeof value === "object" && Object.keys(value).length === 0) ||
+    (typeof value === "string" && value.trim().length === 0);
 
+  loadDisplay = () => {
+    if (
+      this.isEmpty(this.props.profile.profile) &&
+      this.props.profile.loading
+    ) {
+      return <Loading />;
+    } else if (
+      this.isEmpty(this.props.profile.profile) &&
+      !this.props.profile.loading
+    ) {
+      return <ProfileForm />;
+    } else {
+      return null;
+    }
+  };
+
+  render() {
     return (
       <Fragment>
+        {this.loadDisplay()}
+
         <SnackBar />
         <PostDialog />
         <Navigation />
