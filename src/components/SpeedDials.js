@@ -7,7 +7,7 @@ import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import FileCopyIcon from "@material-ui/icons/FileCopyOutlined";
 import CreateIcon from "@material-ui/icons/Create";
-import SmsIcon from "@material-ui/icons/Sms";
+import ChatIcon from "@material-ui/icons/Chat";
 import EventIcon from "@material-ui/icons/Event";
 import { connect } from "react-redux";
 import {
@@ -29,7 +29,7 @@ const styles = theme => ({
 
 const actions = [
   { icon: <CreateIcon />, name: "Post" },
-  { icon: <SmsIcon />, name: "Chat" },
+  { icon: <ChatIcon />, name: "Chat" },
   { icon: <EventIcon />, name: "Event" }
 ];
 
@@ -55,6 +55,7 @@ class SpeedDials extends React.Component {
   handleClickAction = dialAction => {
     switch (dialAction) {
       case "Post":
+        this.props.postDialog();
         this.props.postDial(dialAction);
       case "Chat":
         this.props.chatDial(dialAction);

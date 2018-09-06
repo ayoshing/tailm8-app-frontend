@@ -45,12 +45,12 @@ function SimpleAppBar(props) {
               color="inherit"
               aria-label="Menu"
             >
-              <MenuIcon />
+              <MenuIcon onClick={props.onClick} />
             </IconButton>
             <Grid item>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                <Typography variant="subheading" color="inherit">
-                  Tailm8
+                <Typography variant="title" color="inherit">
+                  TAILM8
                 </Typography>
               </Link>
             </Grid>

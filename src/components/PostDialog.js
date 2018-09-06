@@ -6,10 +6,15 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { connect } from "react-redux";
+import SpeedDials from "./SpeedDials";
+import { createPostAction } from "../redux/actions/postActions";
+import { withRouter } from "react-router-dom";
 
-export default class FormDialog extends React.Component {
+class PostDialog extends React.Component {
   state = {
-    open: false
+    open: false,
+    content: ""
   };
 
   handleClickOpen = () => {
@@ -20,14 +25,31 @@ export default class FormDialog extends React.Component {
     this.setState({ open: false });
   };
 
+  handleChange = e => {
+    this.setState({
+      content: e.target.value
+    });
+  };
+
+  handlePost = e => {
+    e.preventDefault();
+    let postData = {
+      content: this.state.content
+    };
+
+    this.props.createPostAction(postData, this.props.history);
+    this.setState({ open: false });
+  };
+
   render() {
     return (
-      <div>
-        <Button onClick={this.handleClickOpen}>Open form dialog</Button>
+      <div style={{ width: "100%" }}>
+        {/* <Button onClick={this.handleClickOpen}>Open form dialog</Button> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          maxWidth="lg"
         >
           <DialogTitle id="form-dialog-title">Create Post</DialogTitle>
           <DialogContent>
@@ -36,22 +58,36 @@ export default class FormDialog extends React.Component {
             </DialogContentText>
             <TextField
               autoFocus
-              margin="dense"
+              // margin="dense"
               id="post"
-              label="Post Content"
-              type="post"
+              placeholder="Bark, Meow, Moo..."
               fullWidth
               multiline
               rows="4"
+              value={this.state.content}
+              onChange={this.handleChange}
+              name="content"
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handlePost} color="primary">
               Post
             </Button>
           </DialogActions>
         </Dialog>
+        <SpeedDials postDialog={this.handleClickOpen} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  post: state.post
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createPostAction }
+  )(PostDialog)
+);
