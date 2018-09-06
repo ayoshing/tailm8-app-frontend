@@ -26,7 +26,7 @@ class Dashboard extends Component {
       this.isEmpty(this.props.profile.profile) &&
       !this.props.profile.loading
     ) {
-      return <ProfileForm />;
+      return <Redirect to="/profile/edit" />;
     } else {
       return null;
     }
