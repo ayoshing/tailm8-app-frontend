@@ -57,11 +57,11 @@ class SpeedDials extends React.Component {
     switch (dialAction) {
       case "Post":
         this.props.openDialogAction();
-        this.props.postDial(dialAction);
+        this.props.clickedPostDial(dialAction);
       case "Chat":
-        this.props.chatDial(dialAction);
+        this.props.clickedChatDial(dialAction);
       case "Event":
-        this.props.eventDial(dialAction);
+        this.props.clickedEventDial(dialAction);
     }
   };
 
