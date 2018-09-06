@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import SnackBar from "./SnackBar";
+import PostDialog from "./PostDialog";
 import Navigation from "./Navigation";
-import { getCurrentProfileAction } from "../redux/actions/profileActions";
-import ProfileForm from "./ProfileForm";
-import SpeedDials from "./SpeedDials";
+import TestPage from "../views/TestPage";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
-  componentDidMount() {}
-
   render() {
     const isEmpty = value =>
       value === undefined ||
@@ -15,15 +14,10 @@ class Dashboard extends Component {
       (typeof value === "object" && Object.keys(value).length === 0) ||
       (typeof value === "string" && value.trim().length === 0);
 
-    console.log(this.props);
     return (
       <Fragment>
-        {/* {isEmpty(this.props.profile.profile) ? <ProfileForm /> : null} */}
-        {isEmpty(this.props.profile.profile) ? (
-          <h2>You Don't Have a Profile</h2>
-        ) : null}
-
-        <SpeedDials />
+        <SnackBar />
+        <PostDialog />
         <Navigation />
       </Fragment>
     );
@@ -33,10 +27,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
+  post: state.post
 });
 
-export default connect(
-  mapStateToProps,
-  { getCurrentProfileAction }
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCurrentUser } from "../redux/actions/authActions";
 import { getCurrentProfileAction } from "../redux/actions/profileActions";
+import Loading from "../components/Loading";
 
 const withAuth = WrappedComponent => {
   class AuthComponent extends Component {
@@ -17,7 +18,7 @@ const withAuth = WrappedComponent => {
       if (localStorage.jwt && this.props.auth.isAuthenticated) {
         return <WrappedComponent {...this.props} />;
       } else if (localStorage.jwt && this.props.profile.loading) {
-        return <div>LOADING</div>;
+        return <Loading />;
       } else {
         return <Redirect to="/" />;
       }
