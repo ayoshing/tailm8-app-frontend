@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import SnackBar from "./SnackBar";
 import PostDialog from "./PostDialog";
+import CommentDialog from "./CommentDialog";
 import Navigation from "./Navigation";
 import PostCardContainer from "../views/PostCardContainer";
 import ProfileForm from "./ProfileForm";
@@ -39,6 +40,7 @@ class Dashboard extends Component {
         {this.loadDisplay()}
         <MenuDrawer />
         <SnackBar />
+        <CommentDialog />
         <PostDialog />
         <SpeedDials />
         <Navigation />

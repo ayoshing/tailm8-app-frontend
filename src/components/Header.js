@@ -11,10 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { logOutUserAction } from "../redux/actions/authActions";
-import {
-  resetProfileAction,
-  openMenuAction
-} from "../redux/actions/profileActions";
+import { openMenuAction } from "../redux/actions/profileActions";
 
 const styles = {
   root: {
@@ -24,7 +21,6 @@ const styles = {
 
 const handleClick = props => {
   props.logOutUserAction();
-  props.resetProfileAction();
   localStorage.removeItem("jwt");
   props.history.push("/");
 };
@@ -87,5 +83,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logOutUserAction, resetProfileAction, openMenuAction }
+  { logOutUserAction, openMenuAction }
 )(withRouter(withStyles(styles)(SimpleAppBar)));

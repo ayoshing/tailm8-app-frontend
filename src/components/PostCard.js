@@ -17,10 +17,15 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import {
+  openCommentDialogAction,
+  getCommentsAction
+} from "../redux/actions/commentActions";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   card: {
-    width: 370
+    width: 320
   },
   media: {
     height: 0,
@@ -55,16 +60,36 @@ const styles = theme => ({
 class PostCard extends React.Component {
   state = { expanded: false };
 
+  componentDidMount() {
+    this.props.getCommentsAction(this.props._id);
+  }
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
   handleCommentClick = () => {
-    console.log(this.props._id);
+    this.props.openCommentDialogAction(this.props._id);
+  };
+
+  handleLikeClick = () => {
+    console.log("click like");
+  };
+
+  renderComments = () => {
+    this.props.comments.map(comment => {
+      return (
+        <Typography>
+          <strong>{comment.userName}: </strong>
+          {comment.content}
+        </Typography>
+      );
+    });
   };
 
   render() {
     const { classes } = this.props;
+
     return (
       <Card className={classes.card}>
         <CardActionArea className={classes.card}>
@@ -88,14 +113,20 @@ class PostCard extends React.Component {
             title="Dogs"
           />
           <CardContent>
-            <Typography component="p">{this.props.content}</Typography>
+            <Typography component="p">
+              <strong>1,000,000 Likes</strong>
+            </Typography>
+            <Typography component="p">
+              <strong>{this.props.userName}: </strong>
+              {this.props.content}
+            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton aria-label="Comment" onClick={this.handleCommentClick}>
             <ChatBubbleOutlineIcon />
           </IconButton>
-          <IconButton aria-label="Like">
+          <IconButton aria-label="Like" onClick={this.handleLikeClick}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="Share">
@@ -115,9 +146,9 @@ class PostCard extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph variant="body2">
-              Comment User
+              {this.props.comments ? this.props.comments.length : 0} Comments
             </Typography>
-            <Typography paragraph>3 Comments</Typography>
+            {this.renderComments()}
           </CardContent>
         </Collapse>
       </Card>
@@ -129,4 +160,11 @@ PostCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PostCard);
+const mapStateToProps = state => ({
+  comments: state.comment.comments.comments
+});
+
+export default connect(
+  mapStateToProps,
+  { openCommentDialogAction, getCommentsAction }
+)(withStyles(styles)(PostCard));
