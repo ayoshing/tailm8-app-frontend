@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import SnackBar from "./SnackBar";
 import PostDialog from "./PostDialog";
 import Navigation from "./Navigation";
-import HomePage from "../views/HomePage";
+import PostCardContainer from "../views/PostCardContainer";
 import ProfileForm from "./ProfileForm";
 import Loading from "./Loading";
 import SpeedDials from "./SpeedDials";
@@ -28,7 +28,7 @@ class Dashboard extends Component {
     ) {
       return <Redirect to="/profile/edit" />;
     } else {
-      return null;
+      return <PostCardContainer />;
     }
   };
 
@@ -36,7 +36,6 @@ class Dashboard extends Component {
     return (
       <Fragment>
         {this.loadDisplay()}
-        <HomePage />
         <SnackBar />
         <PostDialog />
         <SpeedDials />

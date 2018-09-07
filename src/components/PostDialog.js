@@ -9,7 +9,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
 import {
   createPostAction,
-  closeDialogAction
+  closeDialogAction,
+  getPostsAction
 } from "../redux/actions/postActions";
 import { withRouter } from "react-router-dom";
 
@@ -83,6 +84,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createPostAction, closeDialogAction }
+    { createPostAction, closeDialogAction, getPostsAction }
   )(PostDialog)
 );

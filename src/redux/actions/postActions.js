@@ -32,7 +32,8 @@ export const createPostAction = (postData, history) => dispatch => {
     .then(json => {
       dispatch(openSnackBarAction());
       history.push("/");
-    });
+    })
+    .then(json => dispatch(getPostsAction()));
   // .catch(err =>
   //   dispatch({
   //     type: GET_ERRORS,

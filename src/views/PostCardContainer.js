@@ -14,10 +14,16 @@ const styles = theme => ({
   }
 });
 
-function HomePage(props) {
+function PostCardContainer(props) {
   const { classes } = props;
   const renderPostCards = () => {
-    console.log(props.posts);
+    return props.posts[0].map(post => {
+      return (
+        <Grid item>
+          <PostCard {...post} />
+        </Grid>
+      );
+    });
   };
 
   return (
@@ -25,7 +31,7 @@ function HomePage(props) {
       <Paper className={classes.root} elevation={0}>
         <Grid container spacing={16} justify="center" alignItems="center">
           {/* <Grid item>
-            <PostCard />
+            <PostCard {...props} />
           </Grid> */}
           {renderPostCards()}
         </Grid>
@@ -34,7 +40,7 @@ function HomePage(props) {
   );
 }
 
-HomePage.propTypes = {
+PostCardContainer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -44,4 +50,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(HomePage));
+export default connect(mapStateToProps)(withStyles(styles)(PostCardContainer));

@@ -48,7 +48,7 @@ const styles = theme => ({
   }
 });
 
-class RecipeReviewCard extends React.Component {
+class PostCard extends React.Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -57,7 +57,7 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props);
     return (
       <Card className={classes.card}>
         <CardActionArea className={classes.card}>
@@ -72,7 +72,7 @@ class RecipeReviewCard extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             }
-            title="Pet Name"
+            title={this.props.userName}
             subheader="September 6, 2018"
           />
           <CardMedia
@@ -81,10 +81,7 @@ class RecipeReviewCard extends React.Component {
             title="Dogs"
           />
           <CardContent>
-            <Typography component="p">
-              Post content goes here. blah blah blah blah aasdf asdfasdf
-              asdfasdfa
-            </Typography>
+            <Typography component="p">{this.props.content}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -121,8 +118,8 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+PostCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(PostCard);
