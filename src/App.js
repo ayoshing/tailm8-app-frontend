@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-import MenuDrawer from "./components/MenuDrawer";
 import indexRoutes from "./routes/index.js";
 import Header from "./components/Header";
 
@@ -10,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <MenuDrawer />
+        <Header />
 
         <Switch>
           {indexRoutes.map((prop, key) => {
