@@ -2,7 +2,7 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  RESET_PROFILE,
+  RESET,
   OPEN_MENU_DRAWER,
   CLOSE_MENU_DRAWER
 } from "../actions/types";
@@ -30,14 +30,14 @@ export default function(state = initialState, action) {
         ...state,
         menuOpen: false
       };
-    case RESET_PROFILE:
-      return initialState;
     case GET_PROFILE:
       return {
         ...state,
         profile: action.payload,
         loading: false
       };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

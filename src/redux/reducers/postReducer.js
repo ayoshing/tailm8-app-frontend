@@ -4,7 +4,8 @@ import {
   OPEN_POST_SNACKBAR,
   CLOSE_POST_SNACKBAR,
   OPEN_POST_DIALOG,
-  CLOSE_POST_DIALOG
+  CLOSE_POST_DIALOG,
+  RESET
 } from "../actions/types";
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
   snackBarOpen: false,
   snackBarVertical: "bottom",
   snackBarHorizontal: "left",
-  snackBarMsg: "Post Success!",
+  snackBarMsg: "",
   dialogOpen: false
 };
 
@@ -28,7 +29,8 @@ export default function(state = initialState, action) {
     case OPEN_POST_SNACKBAR:
       return {
         ...state,
-        snackBarOpen: true
+        snackBarOpen: true,
+        snackBarMsg: action.payload
       };
     case CLOSE_POST_SNACKBAR:
       return {
@@ -45,6 +47,8 @@ export default function(state = initialState, action) {
         ...state,
         dialogOpen: false
       };
+    case RESET:
+      return initialState;
     default:
       return state;
   }
