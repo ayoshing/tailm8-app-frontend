@@ -1,8 +1,5 @@
 import {
   GET_ERRORS,
-  CLICKED_CHAT_DIAL,
-  CLICKED_POST_DIAL,
-  CLICKED_EVENT_DIAL,
   GET_ALL_POSTS,
   OPEN_POST_SNACKBAR,
   CLOSE_POST_SNACKBAR,
@@ -23,21 +20,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case CLICKED_CHAT_DIAL:
-      return {
-        ...state,
-        dialAction: action.payload
-      };
-    case CLICKED_POST_DIAL:
-      return {
-        ...state,
-        dialAction: action.payload
-      };
-    case CLICKED_EVENT_DIAL:
-      return {
-        ...state,
-        dialAction: action.payload
-      };
     case GET_ALL_POSTS:
       return {
         ...state,

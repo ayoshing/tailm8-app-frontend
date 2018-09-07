@@ -2,7 +2,9 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  RESET_PROFILE
+  RESET_PROFILE,
+  OPEN_MENU_DRAWER,
+  CLOSE_MENU_DRAWER
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +19,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case OPEN_MENU_DRAWER:
+      return {
+        ...state,
+        menuOpen: true
+      };
+    case CLOSE_MENU_DRAWER:
+      return {
+        ...state,
+        menuOpen: false
       };
     case RESET_PROFILE:
       return initialState;

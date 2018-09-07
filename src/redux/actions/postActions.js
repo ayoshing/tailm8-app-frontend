@@ -1,8 +1,5 @@
 import {
   GET_ERRORS,
-  CLICKED_CHAT_DIAL,
-  CLICKED_POST_DIAL,
-  CLICKED_EVENT_DIAL,
   GET_ALL_POSTS,
   OPEN_POST_SNACKBAR,
   CLOSE_POST_SNACKBAR,
@@ -56,27 +53,6 @@ export const getPostsAction = () => dispatch => {
         payload: json
       });
     });
-};
-
-export const clickedPostDial = dialAction => {
-  return {
-    type: CLICKED_POST_DIAL,
-    payload: dialAction
-  };
-};
-
-export const clickedChatDial = dialAction => {
-  return {
-    type: CLICKED_CHAT_DIAL,
-    payload: dialAction
-  };
-};
-
-export const clickedEventDial = dialAction => {
-  return {
-    type: CLICKED_EVENT_DIAL,
-    payload: dialAction
-  };
 };
 
 export const openSnackBarAction = () => {

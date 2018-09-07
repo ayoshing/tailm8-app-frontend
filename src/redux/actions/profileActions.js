@@ -2,7 +2,9 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  RESET_PROFILE
+  RESET_PROFILE,
+  OPEN_MENU_DRAWER,
+  CLOSE_MENU_DRAWER
 } from "./types";
 
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
@@ -79,5 +81,17 @@ export const profileLoadingAction = () => {
 export const resetProfileAction = () => {
   return {
     type: RESET_PROFILE
+  };
+};
+
+export const openMenuAction = () => {
+  return {
+    type: OPEN_MENU_DRAWER
+  };
+};
+
+export const closeMenuAction = () => {
+  return {
+    type: CLOSE_MENU_DRAWER
   };
 };
