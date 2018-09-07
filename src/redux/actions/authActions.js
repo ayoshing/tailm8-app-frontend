@@ -1,6 +1,7 @@
-import { GET_ERRORS, SET_CURRENT_USER, LOGOUT_CURRENT_USER } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, RESET } from "./types";
 import jwtDecode from "jwt-decode";
 import { getCurrentProfileAction } from "./profileActions";
+import { getPostsAction } from "./postActions";
 
 const API_USERS_URL = "http://localhost:3001/api/users";
 
@@ -45,6 +46,7 @@ export const logInUser = (userData, history) => dispatch => {
       const decodedJwt = jwtDecode(token);
       dispatch(setCurrentUser(decodedJwt));
       dispatch(getCurrentProfileAction(decodedJwt.id));
+      dispatch(getPostsAction());
     })
     .then(json => history.push("/"))
     .catch(err =>
@@ -82,6 +84,6 @@ export const setCurrentUser = decodedJwt => {
 
 export const logOutUserAction = () => {
   return {
-    type: LOGOUT_CURRENT_USER
+    type: RESET
   };
 };

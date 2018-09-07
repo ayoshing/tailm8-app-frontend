@@ -19,3 +19,8 @@ export const CLOSE_POST_DIALOG = "CLOSE_POST_DIALOG";
 
 // commentReducer actions
 export const GET_ALL_COMMENTS = "GET_ALL_COMMENTS";
+export const OPEN_COMMENT_DIALOG = "OPEN_COMMENT_DIALOG";
+export const CLOSE_COMMENT_DIALOG = "CLOSE_COMMENT_DIALOG";
+export const OPEN_COMMENT_SNACKBAR = "OPEN_COMMENT_SNACKBAR";
+
+export const RESET = "RESET";

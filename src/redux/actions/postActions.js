@@ -27,7 +27,7 @@ export const createPostAction = (postData, history) => dispatch => {
       throw new Error("Post Error");
     })
     .then(json => {
-      dispatch(openSnackBarAction());
+      dispatch(openSnackBarAction("Post Success"));
       history.push("/");
     })
     .then(json => dispatch(getPostsAction()));
@@ -55,9 +55,10 @@ export const getPostsAction = () => dispatch => {
     });
 };
 
-export const openSnackBarAction = () => {
+export const openSnackBarAction = msg => {
   return {
-    type: OPEN_POST_SNACKBAR
+    type: OPEN_POST_SNACKBAR,
+    payload: msg
   };
 };
 

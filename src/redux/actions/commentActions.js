@@ -1,21 +1,24 @@
-import { GET_ALL_COMMENTS } from "./types";
+import {
+  GET_ALL_COMMENTS,
+  OPEN_COMMENT_DIALOG,
+  CLOSE_COMMENT_DIALOG
+} from "./types";
+import { openSnackBarAction } from "./postActions";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
-export const createPostAction = (postData, history) => dispatch => {
-  let postId = postData._id;
-  let postFields = {
-    content: postData.content,
-    imgUrl: postData.imgUrl
-  };
-
+export const createCommentAction = (
+  commentData,
+  postId,
+  history
+) => dispatch => {
   let config = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.jwt
     },
-    body: JSON.stringify(postFields)
+    body: JSON.stringify(commentData)
   };
 
   fetch(`${API_POSTS_URL}/${postId}/comments`, config)
@@ -25,7 +28,11 @@ export const createPostAction = (postData, history) => dispatch => {
       }
       throw new Error("Post Error");
     })
-    .then(json => dispatch(getCommentsAction()));
+    .then(json => {
+      dispatch(openSnackBarAction("Comment Added"));
+      // history.push("/");
+    })
+    .then(json => dispatch(getCommentsAction(postId)));
 };
 
 export const getCommentsAction = postId => dispatch => {
@@ -42,4 +49,17 @@ export const getCommentsAction = postId => dispatch => {
         payload: json
       });
     });
+};
+
+export const openCommentDialogAction = postId => {
+  return {
+    type: OPEN_COMMENT_DIALOG,
+    payload: postId
+  };
+};
+
+export const closeCommentDialogAction = () => {
+  return {
+    type: CLOSE_COMMENT_DIALOG
+  };
 };

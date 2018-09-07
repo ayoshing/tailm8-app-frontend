@@ -2,7 +2,7 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  RESET_PROFILE,
+  RESET,
   OPEN_MENU_DRAWER,
   CLOSE_MENU_DRAWER
 } from "./types";
@@ -75,12 +75,6 @@ export const getCurrentProfileAction = userId => dispatch => {
 export const profileLoadingAction = () => {
   return {
     type: PROFILE_LOADING
-  };
-};
-
-export const resetProfileAction = () => {
-  return {
-    type: RESET_PROFILE
   };
 };
 
