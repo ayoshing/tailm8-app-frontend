@@ -10,7 +10,8 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    marginBottom: 50
   }
 });
 
@@ -37,9 +38,6 @@ class PostCardContainer extends React.Component {
             alignItems="center"
             direction="column"
           >
-            {/* <Grid item>
-            <PostCard {...props} />
-          </Grid> */}
             {renderPostCards()}
           </Grid>
         </Paper>
