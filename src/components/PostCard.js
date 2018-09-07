@@ -21,7 +21,7 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 
 const styles = theme => ({
   card: {
-    maxWidth: 400
+    width: 300
   },
   media: {
     height: 0,
@@ -44,7 +44,7 @@ const styles = theme => ({
     transform: "rotate(180deg)"
   },
   avatar: {
-    backgroundColor: red[500]
+    backgroundColor: "turquoise"
   }
 });
 
@@ -60,7 +60,7 @@ class RecipeReviewCard extends React.Component {
 
     return (
       <Card className={classes.card}>
-        <CardActionArea>
+        <CardActionArea className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label="Post" className={classes.avatar}>
@@ -77,11 +77,14 @@ class RecipeReviewCard extends React.Component {
           />
           <CardMedia
             className={classes.media}
-            src="https://i.pinimg.com/originals/41/25/e9/4125e9cbbe54ab3af304483d65d3d3e3.jpg"
+            image="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/All-about-puppies--Cesar%E2%80%99s-tips%2C-tricks-and-advice.jpg?itok=bi9xUvwe"
             title="Dogs"
           />
           <CardContent>
-            <Typography component="p">Post content goes here</Typography>
+            <Typography component="p">
+              Post content goes here. blah blah blah blah aasdf asdfasdf
+              asdfasdfa
+            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -106,13 +109,11 @@ class RecipeReviewCard extends React.Component {
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          {/* Separate Comment Card */}
           <CardContent>
             <Typography paragraph variant="body2">
               Comment User
             </Typography>
             <Typography paragraph>3 Comments</Typography>
-            <Typography>Like Button</Typography>
           </CardContent>
         </Collapse>
       </Card>

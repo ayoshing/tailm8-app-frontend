@@ -19,7 +19,7 @@ import {
 
 const styles = theme => ({
   root: {
-    height: 380
+    height: 0
   },
   speedDial: {
     position: "fixed",

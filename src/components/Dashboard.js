@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import SnackBar from "./SnackBar";
 import PostDialog from "./PostDialog";
 import Navigation from "./Navigation";
-import TestPage from "../views/TestPage";
+import HomePage from "../views/HomePage";
 import ProfileForm from "./ProfileForm";
 import Loading from "./Loading";
 import SpeedDials from "./SpeedDials";
@@ -36,7 +36,7 @@ class Dashboard extends Component {
     return (
       <Fragment>
         {this.loadDisplay()}
-
+        <HomePage />
         <SnackBar />
         <PostDialog />
         <SpeedDials />

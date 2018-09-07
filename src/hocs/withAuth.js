@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCurrentUser } from "../redux/actions/authActions";
 import { getCurrentProfileAction } from "../redux/actions/profileActions";
+import { getPostsAction } from "../redux/actions/postActions";
 import Loading from "../components/Loading";
 
 const withAuth = WrappedComponent => {
@@ -11,6 +12,7 @@ const withAuth = WrappedComponent => {
       if (localStorage.jwt && !this.props.auth.isAuthenticated) {
         this.props.getCurrentUser();
         this.props.getCurrentProfileAction(this.props.auth.user.id);
+        this.props.getPostsAction();
       }
     }
 
@@ -27,14 +29,15 @@ const withAuth = WrappedComponent => {
 
   return connect(
     mapStateToProps,
-    { getCurrentUser, getCurrentProfileAction }
+    { getCurrentUser, getCurrentProfileAction, getPostsAction }
   )(AuthComponent);
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
+  post: state.post
 });
 
 export default withAuth;
