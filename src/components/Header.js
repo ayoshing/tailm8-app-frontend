@@ -11,7 +11,10 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { logOutUserAction } from "../redux/actions/authActions";
-import { resetProfileAction } from "../redux/actions/profileActions";
+import {
+  resetProfileAction,
+  openMenuAction
+} from "../redux/actions/profileActions";
 
 const styles = {
   root: {
@@ -45,7 +48,7 @@ function SimpleAppBar(props) {
               color="inherit"
               aria-label="Menu"
             >
-              <MenuIcon onClick={props.onClick} />
+              <MenuIcon onClick={() => props.openMenuAction()} />
             </IconButton>
             <Grid item>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -82,9 +85,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { logOutUserAction, resetProfileAction }
-  )(withStyles(styles)(SimpleAppBar))
-);
+export default connect(
+  mapStateToProps,
+  { logOutUserAction, resetProfileAction, openMenuAction }
+)(withRouter(withStyles(styles)(SimpleAppBar)));

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
@@ -10,12 +9,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import ChatIcon from "@material-ui/icons/Chat";
 import EventIcon from "@material-ui/icons/Event";
 import { connect } from "react-redux";
-import {
-  clickedPostDial,
-  clickedChatDial,
-  clickedEventDial,
-  openDialogAction
-} from "../redux/actions/postActions";
+import { openDialogAction } from "../redux/actions/postActions";
 
 const styles = theme => ({
   root: {
@@ -57,11 +51,11 @@ class SpeedDials extends React.Component {
     switch (dialAction) {
       case "Post":
         this.props.openDialogAction();
-        this.props.clickedPostDial(dialAction);
+
       case "Chat":
-        this.props.clickedChatDial(dialAction);
+        return null;
       case "Event":
-        this.props.clickedEventDial(dialAction);
+        return null;
     }
   };
 
@@ -130,5 +124,5 @@ SpeedDials.propTypes = {
 
 export default connect(
   null,
-  { clickedPostDial, clickedChatDial, clickedEventDial, openDialogAction }
+  { openDialogAction }
 )(withStyles(styles)(SpeedDials));

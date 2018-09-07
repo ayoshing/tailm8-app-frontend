@@ -8,6 +8,7 @@ import PostCardContainer from "../views/PostCardContainer";
 import ProfileForm from "./ProfileForm";
 import Loading from "./Loading";
 import SpeedDials from "./SpeedDials";
+import MenuDrawer from "./MenuDrawer";
 
 class Dashboard extends Component {
   isEmpty = value =>
@@ -36,6 +37,7 @@ class Dashboard extends Component {
     return (
       <Fragment>
         {this.loadDisplay()}
+        <MenuDrawer />
         <SnackBar />
         <PostDialog />
         <SpeedDials />

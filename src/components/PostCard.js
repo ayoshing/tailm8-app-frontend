@@ -12,7 +12,6 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import red from "@material-ui/core/colors/red";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -60,6 +59,10 @@ class PostCard extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleCommentClick = () => {
+    console.log(this.props._id);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -81,7 +84,7 @@ class PostCard extends React.Component {
           />
           <CardMedia
             className={classes.media}
-            image="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/All-about-puppies--Cesar%E2%80%99s-tips%2C-tricks-and-advice.jpg?itok=bi9xUvwe"
+            image={this.props.imgUrl}
             title="Dogs"
           />
           <CardContent>
@@ -89,7 +92,7 @@ class PostCard extends React.Component {
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Comment">
+          <IconButton aria-label="Comment" onClick={this.handleCommentClick}>
             <ChatBubbleOutlineIcon />
           </IconButton>
           <IconButton aria-label="Like">

@@ -4,61 +4,39 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import Header from "./Header";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { closeMenuAction } from "../redux/actions/profileActions";
+import { mailFolderListItems, otherMailFolderListItems } from "./tileData";
 
 const styles = {
   list: {
     width: 250
-  },
-  fullList: {
-    width: "auto"
   }
 };
-
 class MenuDrawer extends React.Component {
-  state = {
-    left: false
-  };
-
-  toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open
-    });
+  toggleDrawer = () => {
+    this.props.closeMenuAction();
   };
 
   render() {
     const { classes } = this.props;
-
     const sideList = (
       <div className={classes.list}>
-        <List>nothing</List>
+        <List>{mailFolderListItems}</List>
         <Divider />
-        <List>nothing</List>
-      </div>
-    );
-
-    const fullList = (
-      <div className={classes.fullList}>
-        <List>nothing</List>
-        <Divider />
-        <List>nothing</List>
+        <List>{otherMailFolderListItems}</List>
       </div>
     );
 
     return (
       <div>
-        <Header onClick={this.toggleDrawer("left", true)} />
-        <Drawer
-          open={this.state.left}
-          onClose={this.toggleDrawer("left", false)}
-        >
+        <Drawer open={this.props.left} onClose={this.toggleDrawer}>
           <div
             tabIndex={0}
             role="button"
-            onClick={this.toggleDrawer("left", false)}
-            onKeyDown={this.toggleDrawer("left", false)}
+            onClick={this.toggleDrawer}
+            onKeyDown={this.toggleDrawer}
           >
             {sideList}
           </div>
@@ -67,17 +45,16 @@ class MenuDrawer extends React.Component {
     );
   }
 }
-
 MenuDrawer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
-  errors: state.errors
+  left: state.profile.menuOpen
 });
 
-export default withRouter(
-  connect(mapStateToProps)(withStyles(styles)(MenuDrawer))
-);
+export default connect(
+  mapStateToProps,
+  { closeMenuAction }
+)(withRouter(withStyles(styles)(MenuDrawer)));

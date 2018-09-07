@@ -16,19 +16,21 @@ import { withRouter } from "react-router-dom";
 
 class PostDialog extends React.Component {
   state = {
-    content: ""
+    content: "",
+    imgUrl: ""
   };
 
   handleChange = e => {
     this.setState({
-      content: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
   handlePost = e => {
     e.preventDefault();
     let postData = {
-      content: this.state.content
+      content: this.state.content,
+      imgUrl: this.state.imgUrl
     };
 
     this.props.createPostAction(postData, this.props.history);
@@ -51,12 +53,12 @@ class PostDialog extends React.Component {
           <DialogTitle id="form-dialog-title">Create Post</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Editor Toggle Buttons Will Go Here
+              {/* Editor Toggle Buttons Will Go Here */}
             </DialogContentText>
             <TextField
               autoFocus
               // margin="dense"
-              id="post"
+              id="content"
               placeholder="Bark, Meow, Moo..."
               fullWidth
               multiline
@@ -64,6 +66,16 @@ class PostDialog extends React.Component {
               value={this.state.content}
               onChange={this.handleChange}
               name="content"
+            />
+
+            <TextField
+              margin="dense"
+              id="imgUrl"
+              placeholder="Add a image URL: (optional)"
+              fullWidth
+              value={this.state.imgUrl}
+              onChange={this.handleChange}
+              name="imgUrl"
             />
           </DialogContent>
           <DialogActions>
