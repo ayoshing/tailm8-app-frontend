@@ -14,30 +14,38 @@ const styles = theme => ({
   }
 });
 
-function PostCardContainer(props) {
-  const { classes } = props;
-  const renderPostCards = () => {
-    return props.posts[0].map(post => {
-      return (
-        <Grid item>
-          <PostCard {...post} />
-        </Grid>
-      );
-    });
-  };
+class PostCardContainer extends React.Component {
+  render() {
+    const { classes } = this.props;
 
-  return (
-    <div>
-      <Paper className={classes.root} elevation={0}>
-        <Grid container spacing={16} justify="center" alignItems="center">
-          {/* <Grid item>
+    const renderPostCards = () => {
+      return this.props.posts.map(post => {
+        return (
+          <Grid item>
+            <PostCard {...post} />
+          </Grid>
+        );
+      });
+    };
+    return (
+      <div>
+        <Paper className={classes.root} elevation={0}>
+          <Grid
+            container
+            spacing={24}
+            justify="space-evenly"
+            alignItems="center"
+            direction="column"
+          >
+            {/* <Grid item>
             <PostCard {...props} />
           </Grid> */}
-          {renderPostCards()}
-        </Grid>
-      </Paper>
-    </div>
-  );
+            {renderPostCards()}
+          </Grid>
+        </Paper>
+      </div>
+    );
+  }
 }
 
 PostCardContainer.propTypes = {
@@ -45,9 +53,7 @@ PostCardContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  posts: state.post.posts,
-  auth: state.auth,
-  errors: state.errors
+  posts: state.post.posts
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(PostCardContainer));

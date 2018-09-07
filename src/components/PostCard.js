@@ -21,7 +21,7 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 
 const styles = theme => ({
   card: {
-    width: 300
+    width: 370
   },
   media: {
     height: 0,
@@ -45,6 +45,11 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: "turquoise"
+  },
+  "@media (min-width: 600px)": {
+    card: {
+      width: 600
+    }
   }
 });
 
@@ -57,7 +62,6 @@ class PostCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
     return (
       <Card className={classes.card}>
         <CardActionArea className={classes.card}>

@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
     case GET_ALL_POSTS:
       return {
         ...state,
-        posts: [...state.posts, action.payload]
+        posts: action.payload
       };
     case OPEN_POST_SNACKBAR:
       return {
