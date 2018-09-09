@@ -2,7 +2,6 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  RESET,
   OPEN_MENU_DRAWER,
   CLOSE_MENU_DRAWER
 } from "./types";

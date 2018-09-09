@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  comments: [],
+  postComments: [],
   dialogOpen: false,
   postId: ""
 };
@@ -16,7 +16,8 @@ export default function(state = initialState, action) {
     case GET_ALL_COMMENTS:
       return {
         ...state,
-        comments: action.payload
+        comments: action.payload,
+        commentLoading: false
       };
     case OPEN_COMMENT_DIALOG:
       return {

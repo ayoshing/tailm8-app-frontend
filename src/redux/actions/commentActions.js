@@ -3,7 +3,7 @@ import {
   OPEN_COMMENT_DIALOG,
   CLOSE_COMMENT_DIALOG
 } from "./types";
-import { openSnackBarAction } from "./postActions";
+import { openSnackBarAction, getPostsAction } from "./postActions";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
 
@@ -30,26 +30,28 @@ export const createCommentAction = (
     })
     .then(json => {
       dispatch(openSnackBarAction("Comment Added"));
-      // history.push("/");
     })
-    .then(json => dispatch(getCommentsAction(postId)));
+    .then(json => dispatch(getPostsAction()));
 };
 
-export const getCommentsAction = postId => dispatch => {
-  fetch(`${API_POSTS_URL}/${postId}`)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Unable To Get Posts");
-    })
-    .then(json => {
-      dispatch({
-        type: GET_ALL_COMMENTS,
-        payload: json
-      });
-    });
-};
+// export const getCommentsAction = postId => dispatch => {
+//   dispatch(commentLoadingAction());
+//
+//   fetch(`${API_POSTS_URL}/${postId}`)
+//     .then(res => {
+//       if (res.ok) {
+//         return res.json();
+//       }
+//       throw new Error("Unable To Get Posts");
+//     })
+//     .then(json => {
+//       console.log("getCommentsAction json", json);
+//       dispatch({
+//         type: GET_ALL_COMMENTS,
+//         payload: json.comments
+//       });
+//     });
+// };
 
 export const openCommentDialogAction = postId => {
   return {
