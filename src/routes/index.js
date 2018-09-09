@@ -10,4 +10,12 @@ const indexRoutes = [
   { path: "/", name: "MainPage", component: MainPage }
 ];
 
+{
+  /* {indexRoutes.map((prop, key) => {
+  return (
+    <Route path={prop.path} key={key} component={prop.component} />
+  );
+})} */
+}
+
 export default indexRoutes;

@@ -22,8 +22,8 @@ class PostCardContainer extends React.Component {
     const renderPostCards = () => {
       return this.props.posts.map(post => {
         return (
-          <Grid item>
-            <PostCard {...post} />
+          <Grid item key={post._id}>
+            <PostCard key={post._id} {...post} />
           </Grid>
         );
       });

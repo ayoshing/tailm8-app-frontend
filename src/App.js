@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-import indexRoutes from "./routes/index.js";
 import Header from "./components/Header";
+import SignUpPage from "./views/SignUpPage";
+import MainPage from "./views/MainPage";
+import ProfileForm from "./components/ProfileForm";
+import TestPage from "./views/TestPage";
 
 import "./App.css";
 
@@ -12,11 +15,10 @@ class App extends Component {
         <Header />
 
         <Switch>
-          {indexRoutes.map((prop, key) => {
-            return (
-              <Route path={prop.path} key={key} component={prop.component} />
-            );
-          })}
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/profile/edit" component={ProfileForm} />
+          <Route exact path="/test" component={TestPage} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </Fragment>
     );

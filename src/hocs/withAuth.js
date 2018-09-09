@@ -29,7 +29,11 @@ const withAuth = WrappedComponent => {
 
   return connect(
     mapStateToProps,
-    { getCurrentUser, getCurrentProfileAction, getPostsAction }
+    {
+      getCurrentUser,
+      getCurrentProfileAction,
+      getPostsAction
+    }
   )(AuthComponent);
 };
 
