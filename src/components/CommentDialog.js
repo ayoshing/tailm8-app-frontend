@@ -9,8 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { connect } from "react-redux";
 import {
   createCommentAction,
-  closeCommentDialogAction,
-  getCommentsAction
+  closeCommentDialogAction
 } from "../redux/actions/commentActions";
 import { withRouter } from "react-router-dom";
 
@@ -86,6 +85,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createCommentAction, closeCommentDialogAction, getCommentsAction }
+    { createCommentAction, closeCommentDialogAction }
   )(CommentDialog)
 );

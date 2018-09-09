@@ -17,10 +17,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import {
-  openCommentDialogAction,
-  getCommentsAction
-} from "../redux/actions/commentActions";
+import { openCommentDialogAction } from "../redux/actions/commentActions";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -60,10 +57,6 @@ const styles = theme => ({
 class PostCard extends React.Component {
   state = { expanded: false };
 
-  componentDidMount() {
-    this.props.getCommentsAction(this.props._id);
-  }
-
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
@@ -73,13 +66,13 @@ class PostCard extends React.Component {
   };
 
   handleLikeClick = () => {
-    console.log("click like");
+    console.log(this.props);
   };
 
   renderComments = () => {
-    this.props.comments.map(comment => {
+    return this.props.comments.map(comment => {
       return (
-        <Typography>
+        <Typography key={comment._id}>
           <strong>{comment.userName}: </strong>
           {comment.content}
         </Typography>
@@ -89,7 +82,6 @@ class PostCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardActionArea className={classes.card}>
@@ -114,7 +106,7 @@ class PostCard extends React.Component {
           />
           <CardContent>
             <Typography component="p">
-              <strong>1,000,000 Likes</strong>
+              <strong>{this.props.likes.length} Likes</strong>
             </Typography>
             <Typography component="p">
               <strong>{this.props.userName}: </strong>
@@ -127,7 +119,7 @@ class PostCard extends React.Component {
             <ChatBubbleOutlineIcon />
           </IconButton>
           <IconButton aria-label="Like" onClick={this.handleLikeClick}>
-            <FavoriteIcon />
+            <FavoriteIcon color="" />
           </IconButton>
           <IconButton aria-label="Share">
             <ShareIcon />
@@ -160,11 +152,7 @@ PostCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  comments: state.comment.comments.comments
-});
-
 export default connect(
-  mapStateToProps,
-  { openCommentDialogAction, getCommentsAction }
+  null,
+  { openCommentDialogAction }
 )(withStyles(styles)(PostCard));
