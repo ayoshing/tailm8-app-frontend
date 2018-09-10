@@ -12,7 +12,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logInUser } from "../redux/actions/authActions";
-import isEmpty from "../validations/isEmpty";
 
 const styles = theme => ({
   layout: {

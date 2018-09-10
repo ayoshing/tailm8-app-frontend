@@ -14,14 +14,25 @@ export const signUpUser = (userData, history) => dispatch => {
     body: JSON.stringify(userData)
   };
 
-  fetch(API_USERS_URL, config)
-    .then(res => history.push("/"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+  fetch(API_USERS_URL, config).then(res => {
+    if (res.status === 400) {
+      res.json().then(json =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: json
+        })
+      );
+    } else {
+      history.push("/");
+    }
+  });
+  // .then(res => history.push("/"))
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
 };
 
 export const logInUser = (userData, history) => dispatch => {
@@ -34,12 +45,6 @@ export const logInUser = (userData, history) => dispatch => {
   };
 
   fetch(`${API_USERS_URL}/login`, config)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error(res.json());
-    // })
     .then(res => res.json())
     .then(json => {
       if (json.token) {

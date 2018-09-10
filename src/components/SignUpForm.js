@@ -12,6 +12,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { signUpUser } from "../redux/actions/authActions";
 import { withRouter } from "react-router-dom";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const styles = theme => ({
   layout: {
@@ -77,6 +78,7 @@ class SignUpForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { errors } = this.props;
 
     return (
       <React.Fragment>
@@ -84,7 +86,12 @@ class SignUpForm extends React.Component {
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <form className={classes.form}>
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.name}
+              >
                 <InputLabel htmlFor="email">Name</InputLabel>
                 <Input
                   id="name"
@@ -94,9 +101,15 @@ class SignUpForm extends React.Component {
                   onChange={this.handleChange}
                   autoFocus
                 />
+                <FormHelperText error>{errors.name}</FormHelperText>
               </FormControl>
 
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.email}
+              >
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
                   id="email"
@@ -105,9 +118,15 @@ class SignUpForm extends React.Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
+                <FormHelperText error>{errors.email}</FormHelperText>
               </FormControl>
 
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.password}
+              >
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   name="password"
@@ -117,9 +136,15 @@ class SignUpForm extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <FormHelperText error>{errors.password}</FormHelperText>
               </FormControl>
 
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.password2}
+              >
                 <InputLabel htmlFor="password2">Confirm Password</InputLabel>
                 <Input
                   name="password2"
@@ -129,6 +154,7 @@ class SignUpForm extends React.Component {
                   value={this.state.password2}
                   onChange={this.handleChange}
                 />
+                <FormHelperText error>{errors.password2}</FormHelperText>
               </FormControl>
 
               <FormControl className={classes.formControl}>
