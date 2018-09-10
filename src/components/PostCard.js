@@ -70,6 +70,15 @@ class PostCard extends React.Component {
     this.props.clickLikeAction(this.props._id);
   };
 
+  handlePostMenu = () => {
+    console.log("open post menu");
+  };
+
+  convertDate = () => {
+    let date = new Date(Date.parse(this.props.date));
+    return date.toDateString();
+  };
+
   renderComments = () => {
     return this.props.comments.map(comment => {
       return (
@@ -82,9 +91,6 @@ class PostCard extends React.Component {
   };
 
   render() {
-    console.log(
-      this.props.likes.forEach(el => console.log(el.user, this.props))
-    );
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
@@ -96,12 +102,12 @@ class PostCard extends React.Component {
               </Avatar>
             }
             action={
-              <IconButton>
+              <IconButton onClick={this.handlePostMenu}>
                 <MoreVertIcon />
               </IconButton>
             }
             title={this.props.userName}
-            subheader="September 6, 2018"
+            subheader={this.convertDate()}
           />
           {this.props.imgUrl ? (
             <CardMedia
