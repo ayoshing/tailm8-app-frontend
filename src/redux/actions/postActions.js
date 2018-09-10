@@ -3,7 +3,9 @@ import {
   OPEN_POST_SNACKBAR,
   CLOSE_POST_SNACKBAR,
   OPEN_POST_DIALOG,
-  CLOSE_POST_DIALOG
+  CLOSE_POST_DIALOG,
+  GET_ERRORS,
+  CLEAR_ERRORS
 } from "./types";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
@@ -18,34 +20,35 @@ export const createPostAction = (postData, history) => dispatch => {
     body: JSON.stringify(postData)
   };
 
-  fetch(API_POSTS_URL, config)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Post Error");
-    })
-    .then(json => {
-      dispatch(openSnackBarAction("Post Success"));
-      history.push("/");
-    })
-    .then(json => dispatch(getPostsAction()));
-  // .catch(err =>
-  //   dispatch({
-  //     type: GET_ERRORS,
-  //     payload: err.response
-  //   })
-  // );
+  return fetch(API_POSTS_URL, config).then(res => {
+    if (res.status === 400) {
+      res.json().then(json => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: json
+        });
+      });
+    } else {
+      res
+        .json()
+        .then(json => {
+          dispatch(openSnackBarAction("Post Success"));
+          history.push("/");
+        })
+        .then(json => dispatch(getPostsAction()));
+    }
+  });
 };
 
 export const getPostsAction = () => dispatch => {
   fetch(API_POSTS_URL)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Unable To Get Posts");
-    })
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error("Unable To Get Posts");
+    // })
+    .then(res => res.json())
     .then(json => {
       dispatch({
         type: GET_ALL_POSTS,
@@ -78,3 +81,5 @@ export const closeDialogAction = () => {
     type: CLOSE_POST_DIALOG
   };
 };
+
+export const clearErrorsAction = () => ({ type: CLEAR_ERRORS });

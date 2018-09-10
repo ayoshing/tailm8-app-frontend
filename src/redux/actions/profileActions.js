@@ -1,5 +1,4 @@
 import {
-  GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
   OPEN_MENU_DRAWER,
@@ -19,25 +18,20 @@ export const createProfile = (profileData, history) => dispatch => {
   };
 
   fetch(API_PROFILE_URL, config)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Profile Error");
-    })
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error("Profile Error");
+    // })
+    .then(res => res.json())
     .then(json => {
       dispatch({
         type: GET_PROFILE,
         payload: json
       });
       history.push("/");
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    });
 };
 
 export const getCurrentProfileAction = userId => dispatch => {
@@ -51,22 +45,17 @@ export const getCurrentProfileAction = userId => dispatch => {
   };
 
   fetch(API_PROFILE_URL, config)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Get profile error");
-    })
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error("Get profile error");
+    // })
+    .then(res => res.json())
     .then(json =>
       dispatch({
         type: GET_PROFILE,
         payload: json
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: {}
       })
     );
 };

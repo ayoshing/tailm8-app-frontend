@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -10,9 +11,13 @@ import { connect } from "react-redux";
 import {
   createPostAction,
   closeDialogAction,
-  getPostsAction
+  getPostsAction,
+  clearErrorsAction
 } from "../redux/actions/postActions";
 import { withRouter } from "react-router-dom";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import { CLEAR_ERRORS } from "../redux/actions/types";
 
 class PostDialog extends React.Component {
   state = {
@@ -33,15 +38,28 @@ class PostDialog extends React.Component {
       imgUrl: this.state.imgUrl
     };
 
-    this.props.createPostAction(postData, this.props.history);
-    this.props.closeDialogAction();
+    this.props.createPostAction(postData, this.props.history).then(res => {
+      if (!this.props.errors.content) {
+        this.setState(
+          {
+            content: ""
+          },
+          () => {
+            this.props.closeDialogAction();
+          }
+        );
+      }
+    });
   };
 
   handleClose = () => {
     this.props.closeDialogAction();
+    this.props.clearErrorsAction();
   };
 
   render() {
+    const { errors } = this.props;
+
     return (
       <div style={{ width: "100%" }}>
         <Dialog
@@ -55,20 +73,28 @@ class PostDialog extends React.Component {
             <DialogContentText>
               {/* Editor Toggle Buttons Will Go Here */}
             </DialogContentText>
-            <TextField
-              autoFocus
-              // margin="dense"
-              id="content"
-              placeholder="Bark, Meow, Moo..."
+            <FormControl
+              margin="normal"
               fullWidth
-              multiline
-              rows="4"
-              value={this.state.content}
-              onChange={this.handleChange}
-              name="content"
-            />
+              required
+              error={errors.content}
+            >
+              <Input
+                autoFocus
+                // margin="dense"
+                id="content"
+                placeholder="Bark, Meow, Moo..."
+                fullWidth
+                multiline
+                rows="4"
+                value={this.state.content}
+                onChange={this.handleChange}
+                name="content"
+              />
+              <FormHelperText error>{errors.content}</FormHelperText>
+            </FormControl>
 
-            <TextField
+            <Input
               margin="dense"
               id="imgUrl"
               placeholder="Add a image URL: (optional)"
@@ -90,12 +116,13 @@ class PostDialog extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  open: state.post.dialogOpen
+  open: state.post.dialogOpen,
+  errors: state.errors
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { createPostAction, closeDialogAction, getPostsAction }
+    { createPostAction, closeDialogAction, getPostsAction, clearErrorsAction }
   )(PostDialog)
 );
