@@ -5,10 +5,12 @@ import withAuth from "../hocs/withAuth";
 
 const AuthedDashboard = withAuth(Dashboard);
 
-export default class extends Component {
+class MainPage extends Component {
   render() {
     return (
       <div>{localStorage.jwt ? <AuthedDashboard /> : <LandingPage />}</div>
     );
   }
 }
+
+export default MainPage;

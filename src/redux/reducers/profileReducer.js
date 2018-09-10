@@ -1,5 +1,4 @@
 import {
-  GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
   RESET,

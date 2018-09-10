@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
@@ -11,6 +12,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logInUser } from "../redux/actions/authActions";
+import isEmpty from "../validations/isEmpty";
 
 const styles = theme => ({
   layout: {
@@ -66,7 +68,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { errors } = this.state;
+    const { errors } = this.props;
 
     return (
       <React.Fragment>
@@ -75,7 +77,12 @@ class LoginForm extends React.Component {
           <Paper className={classes.paper}>
             <Avatar>Placeholder</Avatar>
             <form className={classes.form}>
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.email}
+              >
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
                   id="email"
@@ -85,8 +92,14 @@ class LoginForm extends React.Component {
                   onChange={this.handleChange}
                   autoFocus
                 />
+                <FormHelperText error>{errors.email}</FormHelperText>
               </FormControl>
-              <FormControl margin="normal" required fullWidth>
+              <FormControl
+                margin="normal"
+                required
+                fullWidth
+                error={errors.password}
+              >
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   name="password"
@@ -96,6 +109,7 @@ class LoginForm extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <FormHelperText error>{errors.password}</FormHelperText>
               </FormControl>
               <Button
                 type="submit"

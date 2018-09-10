@@ -15,7 +15,7 @@ export const signUpUser = (userData, history) => dispatch => {
   };
 
   fetch(API_USERS_URL, config)
-    .then(res => history.push("/login"))
+    .then(res => history.push("/"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -34,27 +34,29 @@ export const logInUser = (userData, history) => dispatch => {
   };
 
   fetch(`${API_USERS_URL}/login`, config)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Login Error");
-    })
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error(res.json());
+    // })
+    .then(res => res.json())
     .then(json => {
-      const { token } = json;
-      localStorage.setItem("jwt", token);
-      const decodedJwt = jwtDecode(token);
-      dispatch(setCurrentUser(decodedJwt));
-      dispatch(getCurrentProfileAction(decodedJwt.id));
-      dispatch(getPostsAction());
+      if (json.token) {
+        const { token } = json;
+        localStorage.setItem("jwt", token);
+        const decodedJwt = jwtDecode(token);
+        dispatch(setCurrentUser(decodedJwt));
+        dispatch(getCurrentProfileAction(decodedJwt.id));
+        dispatch(getPostsAction());
+      } else {
+        dispatch({
+          type: GET_ERRORS,
+          payload: json
+        });
+      }
     })
-    .then(json => history.push("/"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response
-      })
-    );
+    .then(json => history.push("/"));
 };
 
 export const getCurrentUser = () => dispatch => {

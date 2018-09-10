@@ -1,15 +1,16 @@
-import { GET_ERRORS, SET_CURRENT_USER, RESET } from "../actions/types";
+import { SET_CURRENT_USER, RESET } from "../actions/types";
+import isEmpty from "../../validations/isEmpty";
 
 const initialState = {
   isAuthenticated: false,
   user: {}
 };
 
-const isEmpty = value =>
-  value === undefined ||
-  value === null ||
-  (typeof value === "object" && Object.keys(value).length === 0) ||
-  (typeof value === "string" && value.trim().length === 0);
+// const isEmpty = value =>
+//   value === undefined ||
+//   value === null ||
+//   (typeof value === "object" && Object.keys(value).length === 0) ||
+//   (typeof value === "string" && value.trim().length === 0);
 
 export default function(state = initialState, action) {
   switch (action.type) {
