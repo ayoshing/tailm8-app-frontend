@@ -18,6 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { openCommentDialogAction } from "../redux/actions/commentActions";
+import { clickLikeAction } from "../redux/actions/postActions";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -66,7 +67,7 @@ class PostCard extends React.Component {
   };
 
   handleLikeClick = () => {
-    console.log(this.props);
+    this.props.clickLikeAction(this.props._id);
   };
 
   renderComments = () => {
@@ -81,6 +82,9 @@ class PostCard extends React.Component {
   };
 
   render() {
+    console.log(
+      this.props.likes.forEach(el => console.log(el.user, this.props))
+    );
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
@@ -121,7 +125,13 @@ class PostCard extends React.Component {
             <ChatBubbleOutlineIcon />
           </IconButton>
           <IconButton aria-label="Like" onClick={this.handleLikeClick}>
-            <FavoriteIcon color="" />
+            <FavoriteIcon
+              color={
+                this.props.likes.find(el => el.user === this.props.userId)
+                  ? "secondary"
+                  : ""
+              }
+            />
           </IconButton>
           <IconButton aria-label="Share">
             <ShareIcon />
@@ -154,7 +164,11 @@ PostCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  userId: state.auth.user.id
+});
+
 export default connect(
-  null,
-  { openCommentDialogAction }
+  mapStateToProps,
+  { openCommentDialogAction, clickLikeAction }
 )(withStyles(styles)(PostCard));

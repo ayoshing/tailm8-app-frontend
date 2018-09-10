@@ -5,7 +5,8 @@ import {
   OPEN_POST_DIALOG,
   CLOSE_POST_DIALOG,
   GET_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  CLICK_LIKE
 } from "./types";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
@@ -83,3 +84,23 @@ export const closeDialogAction = () => {
 };
 
 export const clearErrorsAction = () => ({ type: CLEAR_ERRORS });
+
+export const clickLikeAction = postId => dispatch => {
+  let config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.jwt
+    }
+  };
+
+  fetch(`${API_POSTS_URL}/${postId}/likes`, config)
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error("Post Error");
+    // })
+    .then(res => res.json())
+    .then(json => dispatch(getPostsAction()));
+};

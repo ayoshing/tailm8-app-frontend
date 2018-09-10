@@ -18,12 +18,13 @@ export const createCommentAction = (
   };
 
   fetch(`${API_POSTS_URL}/${postId}/comments`, config)
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error("Post Error");
-    })
+    // .then(res => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   throw new Error("Post Error");
+    // })
+    .then(res => res.json())
     .then(json => {
       dispatch(openSnackBarAction("Comment Added"));
     })
