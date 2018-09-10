@@ -99,18 +99,20 @@ class PostCard extends React.Component {
             title={this.props.userName}
             subheader="September 6, 2018"
           />
-          <CardMedia
-            className={classes.media}
-            image={this.props.imgUrl}
-            title="Dogs"
-          />
+          {this.props.imgUrl ? (
+            <CardMedia
+              className={classes.media}
+              image={this.props.imgUrl}
+              title="Dogs"
+            />
+          ) : null}
           <CardContent>
-            <Typography component="p">
-              <strong>{this.props.likes.length} Likes</strong>
-            </Typography>
             <Typography component="p">
               <strong>{this.props.userName}: </strong>
               {this.props.content}
+            </Typography>
+            <Typography component="p">
+              <strong>{this.props.likes.length} Likes</strong>
             </Typography>
           </CardContent>
         </CardActionArea>
