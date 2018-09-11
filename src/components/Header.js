@@ -19,12 +19,6 @@ const styles = {
   }
 };
 
-const handleClick = props => {
-  props.logOutUserAction();
-  localStorage.removeItem("jwt");
-  props.history.push("/");
-};
-
 function SimpleAppBar(props) {
   const { classes } = props;
 
@@ -36,33 +30,26 @@ function SimpleAppBar(props) {
             container
             spacing={16}
             alignItems="center"
-            justify="space-between"
+            // justify="flex-end"
             direction="row"
           >
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon onClick={() => props.openMenuAction()} />
-            </IconButton>
+            {localStorage.jwt ? (
+              <Grid item>
+                <IconButton
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="Menu"
+                >
+                  <MenuIcon onClick={() => props.openMenuAction()} />
+                </IconButton>
+              </Grid>
+            ) : null}
             <Grid item>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <Typography variant="title" color="inherit">
                   TAILM8
                 </Typography>
               </Link>
-            </Grid>
-            <Grid item>
-              {localStorage.jwt ? (
-                <Button
-                  color="inherit"
-                  justify="flex-end"
-                  onClick={() => handleClick(props)}
-                >
-                  Logout
-                </Button>
-              ) : null}
             </Grid>
           </Grid>
         </Toolbar>
@@ -76,9 +63,7 @@ SimpleAppBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile,
-  errors: state.errors
+  auth: state.auth
 });
 
 export default connect(
