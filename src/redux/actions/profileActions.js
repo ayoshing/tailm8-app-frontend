@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   PROFILE_LOADING,
   OPEN_MENU_DRAWER,
-  CLOSE_MENU_DRAWER
+  CLOSE_MENU_DRAWER,
+  GET_ERRORS
 } from "./types";
 
 const API_PROFILE_URL = "http://localhost:3001/api/profile";
@@ -18,12 +19,6 @@ export const createProfile = (profileData, history) => dispatch => {
   };
 
   fetch(API_PROFILE_URL, config)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error("Profile Error");
-    // })
     .then(res => res.json())
     .then(json => {
       dispatch({
@@ -51,13 +46,27 @@ export const getCurrentProfileAction = userId => dispatch => {
     //   }
     //   throw new Error("Get profile error");
     // })
-    .then(res => res.json())
-    .then(json =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: json
-      })
-    );
+    .then(res => {
+      if (res.status === 404 || res.status === 400) {
+        res.json().then(json => {
+          dispatch({
+            type: GET_ERRORS,
+            payload: json
+          });
+          dispatch({
+            type: GET_PROFILE,
+            payload: {}
+          });
+        });
+      } else {
+        res.json().then(json =>
+          dispatch({
+            type: GET_PROFILE,
+            payload: json
+          })
+        );
+      }
+    });
 };
 
 export const profileLoadingAction = () => {

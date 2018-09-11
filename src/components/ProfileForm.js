@@ -14,6 +14,8 @@ import DatePickers from "./DatePickers";
 import GenderRadioButton from "./GenderRadioButton";
 import PhoneTextField from "./PhoneTextField";
 import Typography from "@material-ui/core/Typography";
+import { clearErrorsAction } from "../redux/actions/postActions";
+import MenuDrawer from "./MenuDrawer";
 
 const styles = theme => ({
   layout: {
@@ -102,6 +104,7 @@ class ProfileForm extends React.Component {
     };
 
     this.props.createProfile(newUser, this.props.history);
+    this.props.clearErrorsAction();
   };
 
   render() {
@@ -115,6 +118,7 @@ class ProfileForm extends React.Component {
 
     return (
       <React.Fragment>
+        <MenuDrawer />
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -242,5 +246,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, clearErrorsAction }
 )(withStyles(styles)(withRouter(ProfileForm)));
