@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Input from "@material-ui/core/Input";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -17,7 +16,6 @@ import {
 import { withRouter } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import { CLEAR_ERRORS } from "../redux/actions/types";
 
 class PostDialog extends React.Component {
   state = {

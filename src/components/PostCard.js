@@ -91,6 +91,7 @@ class PostCard extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
