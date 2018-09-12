@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { logOutUserAction } from "../redux/actions/authActions";
 import { openMenuAction } from "../redux/actions/profileActions";
+import { clearErrorsAction } from "../redux/actions/postActions";
 
 const styles = {
   root: {
@@ -21,6 +22,12 @@ const styles = {
 
 function SimpleAppBar(props) {
   const { classes } = props;
+  const handleClick = e => {
+    props.openMenuAction();
+  };
+  const handleHome = () => {
+    props.clearErrorsAction();
+  };
 
   return (
     <div className={classes.root}>
@@ -39,12 +46,13 @@ function SimpleAppBar(props) {
                   className={classes.menuButton}
                   color="inherit"
                   aria-label="Menu"
+                  onClick={handleClick}
                 >
-                  <MenuIcon onClick={() => props.openMenuAction()} />
+                  <MenuIcon />
                 </IconButton>
               </Grid>
             ) : null}
-            <Grid item>
+            <Grid item onClick={handleHome}>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <Typography variant="title" color="inherit">
                   TAILM8
@@ -68,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logOutUserAction, openMenuAction }
+  { logOutUserAction, openMenuAction, clearErrorsAction }
 )(withRouter(withStyles(styles)(SimpleAppBar)));

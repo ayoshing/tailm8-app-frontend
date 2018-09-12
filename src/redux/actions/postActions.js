@@ -30,13 +30,16 @@ export const createPostAction = (postData, history) => dispatch => {
         });
       });
     } else {
+      dispatch(clearErrorsAction());
       res
         .json()
         .then(json => {
           dispatch(openSnackBarAction("Post Success"));
           history.push("/");
         })
-        .then(json => dispatch(getPostsAction()));
+        .then(json => {
+          dispatch(getPostsAction());
+        });
     }
   });
 };

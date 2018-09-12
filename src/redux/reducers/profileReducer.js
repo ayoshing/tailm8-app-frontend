@@ -9,7 +9,8 @@ import {
 const initialState = {
   profile: {},
   profiles: null,
-  loading: false
+  loading: false,
+  menuOpen: false
 };
 
 export default function(state = initialState, action) {
