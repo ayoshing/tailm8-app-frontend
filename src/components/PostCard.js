@@ -10,6 +10,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -56,7 +58,10 @@ const styles = theme => ({
 });
 
 class PostCard extends React.Component {
-  state = { expanded: false };
+  state = {
+    expanded: false,
+    anchorEl: null
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -70,8 +75,29 @@ class PostCard extends React.Component {
     this.props.clickLikeAction(this.props._id);
   };
 
-  handlePostMenu = () => {
-    console.log("open post menu");
+  handleOpenPostMenu = e => {
+    e.stopPropagation();
+    this.setState({ anchorEl: e.currentTarget });
+  };
+
+  handleClosePostMenu = e => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleDeletePost = e => {
+    e.stopPropagation();
+    console.log("delete post");
+    this.setState({ anchorEl: null });
+  };
+
+  handleAddFriend = e => {
+    e.stopPropagation();
+    console.log("add friend");
+    this.setState({ anchorEl: null });
+  };
+
+  handleCardArea = e => {
+    console.log("card area");
   };
 
   convertDate = () => {
@@ -92,76 +118,98 @@ class PostCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { anchorEl } = this.state;
+
     return (
-      <Card className={classes.card}>
-        <CardActionArea className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Post" className={classes.avatar}>
-                T
-              </Avatar>
-            }
-            action={
-              <IconButton onClick={this.handlePostMenu}>
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={this.props.userName}
-            subheader={this.convertDate()}
-          />
-          {this.props.imgUrl ? (
-            <CardMedia
-              className={classes.media}
-              image={this.props.imgUrl}
-              title="Dogs"
-            />
-          ) : null}
-          <CardContent>
-            <Typography component="p">
-              <strong>{this.props.userName}: </strong>
-              {this.props.content}
-            </Typography>
-            <Typography component="p">
-              <strong>{this.props.likes.length} Likes</strong>
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Comment" onClick={this.handleCommentClick}>
-            <ChatBubbleOutlineIcon />
-          </IconButton>
-          <IconButton aria-label="Like" onClick={this.handleLikeClick}>
-            <FavoriteIcon
-              color={
-                this.props.likes.find(el => el.user === this.props.userId)
-                  ? "secondary"
-                  : ""
-              }
-            />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
+      <React.Fragment>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClosePostMenu}
+        >
+          <MenuItem onClick={this.handleDeletePost}>Delete Post</MenuItem>
+          <MenuItem onClick={this.handleAddFriend}>Add Friend</MenuItem>
+          {/* <MenuItem onClick={this.handleFollowPost}>Follow Post</MenuItem> */}
+        </Menu>
+        <Card className={classes.card}>
+          <CardActionArea
+            className={classes.card}
+            onClick={this.handleCardArea}
           >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph variant="body2">
-              {this.props.comments ? this.props.comments.length : 0} Comments
-            </Typography>
-            {this.renderComments()}
-          </CardContent>
-        </Collapse>
-      </Card>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="Post" className={classes.avatar}>
+                  T
+                </Avatar>
+              }
+              action={
+                <IconButton>
+                  <MoreVertIcon
+                    aria-owns={anchorEl ? "simple-menu" : null}
+                    aria-haspopup="true"
+                    onClick={this.handleOpenPostMenu}
+                  />
+                </IconButton>
+              }
+              title={this.props.userName}
+              subheader={this.convertDate()}
+            />
+            {this.props.imgUrl ? (
+              <CardMedia
+                className={classes.media}
+                image={this.props.imgUrl}
+                title="Dogs"
+              />
+            ) : null}
+            <CardContent>
+              <Typography component="p">
+                <strong>{this.props.userName}: </strong>
+                {this.props.content}
+              </Typography>
+              <Typography component="p">
+                <strong>{this.props.likes.length} Likes</strong>
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Comment" onClick={this.handleCommentClick}>
+              <ChatBubbleOutlineIcon />
+            </IconButton>
+            <IconButton aria-label="Like" onClick={this.handleLikeClick}>
+              <FavoriteIcon
+                color={
+                  this.props.likes.find(el => el.user === this.props.userId)
+                    ? "secondary"
+                    : ""
+                }
+              />
+            </IconButton>
+            {/* TODO: stretch goal share feature
+            <IconButton aria-label="Share">
+            <ShareIcon />
+          </IconButton> */}
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph variant="body2">
+                {this.props.comments ? this.props.comments.length : 0} Comments
+              </Typography>
+              {this.renderComments()}
+            </CardContent>
+          </Collapse>
+        </Card>
+      </React.Fragment>
     );
   }
 }
