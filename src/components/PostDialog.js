@@ -16,6 +16,7 @@ import {
 import { withRouter } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import isEmpty from "../validations/isEmpty";
 
 class PostDialog extends React.Component {
   state = {
@@ -24,9 +25,16 @@ class PostDialog extends React.Component {
   };
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState(
+      {
+        [e.target.name]: e.target.value
+      },
+      () => {
+        if (isEmpty(this.state.imgUrl)) {
+          this.props.clearErrorsAction();
+        }
+      }
+    );
   };
 
   handlePost = e => {
@@ -37,10 +45,11 @@ class PostDialog extends React.Component {
     };
 
     this.props.createPostAction(postData, this.props.history).then(res => {
-      if (!this.props.errors.content) {
+      if (isEmpty(this.props.errors)) {
         this.setState(
           {
-            content: ""
+            content: "",
+            imgUrl: ""
           },
           () => {
             this.props.closeDialogAction();
