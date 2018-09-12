@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -12,6 +12,8 @@ import {
   closeCommentDialogAction
 } from "../redux/actions/commentActions";
 import { withRouter } from "react-router-dom";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 class CommentDialog extends React.Component {
   state = {
@@ -30,12 +32,20 @@ class CommentDialog extends React.Component {
       content: this.state.content
     };
 
-    this.props.createCommentAction(
-      commentData,
-      this.props.postId,
-      this.props.history
-    );
-    this.props.closeCommentDialogAction();
+    this.props
+      .createCommentAction(commentData, this.props.postId, this.props.history)
+      .then(res => {
+        if (!this.props.errors.content) {
+          this.setState(
+            {
+              content: ""
+            },
+            () => {
+              this.props.closeCommentDialogAction();
+            }
+          );
+        }
+      });
   };
 
   handleClose = () => {
@@ -43,6 +53,8 @@ class CommentDialog extends React.Component {
   };
 
   render() {
+    const { errors } = this.props;
+
     return (
       <div style={{ width: "100%" }}>
         <Dialog
@@ -53,18 +65,26 @@ class CommentDialog extends React.Component {
         >
           <DialogTitle id="form-dialog-title">Add Comment</DialogTitle>
           <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="content"
-              placeholder="Comment"
+            <FormControl
+              margin="normal"
               fullWidth
-              multiline
-              rows="2"
-              value={this.state.content}
-              onChange={this.handleChange}
-              name="content"
-            />
+              required
+              error={errors.content}
+            >
+              <Input
+                autoFocus
+                margin="dense"
+                id="content"
+                placeholder="Comment"
+                fullWidth
+                multiline
+                rows="2"
+                value={this.state.content}
+                onChange={this.handleChange}
+                name="content"
+              />
+              <FormHelperText error>{errors.content}</FormHelperText>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleComment} color="primary">
@@ -79,7 +99,8 @@ class CommentDialog extends React.Component {
 
 const mapStateToProps = state => ({
   open: state.comment.dialogOpen,
-  postId: state.comment.postId
+  postId: state.comment.postId,
+  errors: state.errors
 });
 
 export default withRouter(

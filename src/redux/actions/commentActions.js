@@ -1,4 +1,9 @@
-import { OPEN_COMMENT_DIALOG, CLOSE_COMMENT_DIALOG } from "./types";
+import {
+  OPEN_COMMENT_DIALOG,
+  CLOSE_COMMENT_DIALOG,
+  GET_ERRORS,
+  CLEAR_ERRORS
+} from "./types";
 import { openSnackBarAction, getPostsAction } from "./postActions";
 
 const API_POSTS_URL = "http://localhost:3001/api/posts";
@@ -17,18 +22,26 @@ export const createCommentAction = (
     body: JSON.stringify(commentData)
   };
 
-  fetch(`${API_POSTS_URL}/${postId}/comments`, config)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error("Post Error");
-    // })
-    .then(res => res.json())
-    .then(json => {
-      dispatch(openSnackBarAction("Comment Added"));
-    })
-    .then(json => dispatch(getPostsAction()));
+  return fetch(`${API_POSTS_URL}/${postId}/comments`, config).then(res => {
+    if (res.status === 400) {
+      res.json().then(json => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: json
+        });
+      });
+    } else {
+      dispatch({
+        type: CLEAR_ERRORS
+      });
+      res
+        .json()
+        .then(json => {
+          dispatch(openSnackBarAction("Comment Added"));
+        })
+        .then(json => dispatch(getPostsAction()));
+    }
+  });
 };
 
 export const openCommentDialogAction = postId => {

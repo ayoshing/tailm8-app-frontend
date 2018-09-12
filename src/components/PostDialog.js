@@ -91,16 +91,23 @@ class PostDialog extends React.Component {
               />
               <FormHelperText error>{errors.content}</FormHelperText>
             </FormControl>
-
-            <Input
-              margin="dense"
-              id="imgUrl"
-              placeholder="Add a image URL: (optional)"
+            <FormControl
+              margin="normal"
               fullWidth
-              value={this.state.imgUrl}
-              onChange={this.handleChange}
-              name="imgUrl"
-            />
+              required
+              error={errors.imgUrl}
+            >
+              <Input
+                margin="dense"
+                id="imgUrl"
+                placeholder="Add a image URL: (optional)"
+                fullWidth
+                value={this.state.imgUrl}
+                onChange={this.handleChange}
+                name="imgUrl"
+              />
+              <FormHelperText error>{errors.imgUrl}</FormHelperText>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handlePost} color="primary">
