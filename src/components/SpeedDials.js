@@ -23,8 +23,8 @@ const styles = theme => ({
 
 const actions = [
   { icon: <CreateIcon />, name: "Post" },
-  { icon: <ChatIcon />, name: "Chat" },
-  { icon: <EventIcon />, name: "Event" }
+  { icon: <ChatIcon />, name: "Chat" }
+  // TODO: stretch feature priority: medium { icon: <EventIcon />, name: "Event" }
 ];
 
 class SpeedDials extends React.Component {

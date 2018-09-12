@@ -35,13 +35,13 @@ class SimpleBottomNavigation extends React.Component {
         showLabels
         className={classes.root}
       >
-        {/* Home button will render Newsfeed */}
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-        {/*  */}
-        <BottomNavigationAction
+
+        {/* TODO: stretch feature priority: medium (after chat feature)
+          <BottomNavigationAction
           label="Notifications"
           icon={<NotificationsIcon />}
-        />
+        /> */}
         <BottomNavigationAction label="Furiends" icon={<FavoriteIcon />} />
       </BottomNavigation>
     );

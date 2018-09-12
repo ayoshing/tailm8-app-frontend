@@ -40,31 +40,28 @@ const Menu = props => {
             </ListItemIcon>
             <ListItemText primary="Avatar" />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <StarIcon />
-            </ListItemIcon>
-            <ListItemText primary={props.userName} />
-          </ListItem>
+          <Link to="/profile/edit" style={{ textDecoration: "none" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary={props.userName} />
+            </ListItem>
+          </Link>
         </div>
       </List>
       <Divider />
-      <Link to="/profile/edit" style={{ textDecoration: "none" }}>
+
+      {/* TODO: stretch feature priority: low
         <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Petfile" />
-        </ListItem>
-      </Link>
-      {/* <ListItem button>
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="Favorites*" />
       </ListItem> */}
       <Divider />
-      <ListItem button>
+      {/* TODO: stretch feature priority: low
+        <ListItem button>
         <ListItemIcon>
           <MailIcon />
         </ListItemIcon>
@@ -75,7 +72,7 @@ const Menu = props => {
           <DeleteIcon />
         </ListItemIcon>
         <ListItemText primary="Help Center(Display Only)" />
-      </ListItem>
+      </ListItem> */}
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
           <ReportIcon />
