@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -35,14 +36,28 @@ class SimpleBottomNavigation extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction
+          label={<span style={{ color: "turquoise" }}>Home</span>}
+          icon={
+            <Link to="/" style={{ color: "turquoise" }}>
+              <HomeIcon />
+            </Link>
+          }
+        />
 
         {/* TODO: stretch feature priority: medium (after chat feature)
           <BottomNavigationAction
           label="Notifications"
           icon={<NotificationsIcon />}
         /> */}
-        <BottomNavigationAction label="Furiends" icon={<FavoriteIcon />} />
+        <BottomNavigationAction
+          label={<span style={{ color: "turquoise" }}>Furiends</span>}
+          icon={
+            <Link to="/test" style={{ color: "turquoise" }}>
+              <FavoriteIcon />
+            </Link>
+          }
+        />
       </BottomNavigation>
     );
   }

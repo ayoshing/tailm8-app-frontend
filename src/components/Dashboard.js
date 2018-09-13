@@ -13,12 +13,6 @@ import MenuDrawer from "./MenuDrawer";
 import isEmpty from "../validations/isEmpty";
 
 class Dashboard extends Component {
-  // isEmpty = value =>
-  //   value === undefined ||
-  //   value === null ||
-  //   (typeof value === "object" && Object.keys(value).length === 0) ||
-  //   (typeof value === "string" && value.trim().length === 0);
-
   loadDisplay = () => {
     if (isEmpty(this.props.profile.profile) && this.props.profile.loading) {
       return <Loading />;

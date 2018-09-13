@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { signUpUser } from "../redux/actions/authActions";
 import { withRouter } from "react-router-dom";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import { clearErrorsAction } from "../redux/actions/postActions";
 
 const styles = theme => ({
   layout: {
@@ -74,6 +75,7 @@ class SignUpForm extends React.Component {
     };
 
     this.props.signUpUser(newUser, this.props.history);
+    this.props.clearErrorsAction();
   };
 
   render() {
@@ -206,6 +208,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { signUpUser }
+    { signUpUser, clearErrorsAction }
   )(withStyles(styles)(SignUpForm))
 );
