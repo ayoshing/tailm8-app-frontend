@@ -21,7 +21,7 @@ export default class extends Component {
             variant="contained"
             color="primary"
             href="/signup"
-            style={{ marginTop: 50, backgroundColor: "turquoise" }}
+            style={{ marginTop: 50, backgroundColor: "chocolate" }}
           >
             Create An Account
           </Button>

@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { logOutUserAction } from "../redux/actions/authActions";
 import { openMenuAction } from "../redux/actions/profileActions";
 import { clearErrorsAction } from "../redux/actions/postActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = {
   root: {
@@ -55,7 +56,7 @@ function SimpleAppBar(props) {
             <Grid item onClick={handleHome}>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                 <Typography variant="title" style={{ color: "chocolate" }}>
-                  TAILM8
+                  TAILM8 <FontAwesomeIcon icon="paw" size="1x" />
                 </Typography>
               </Link>
             </Grid>

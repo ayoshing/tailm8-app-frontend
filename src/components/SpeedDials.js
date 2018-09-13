@@ -9,6 +9,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import EventIcon from "@material-ui/icons/Event";
 import { connect } from "react-redux";
 import { openDialogAction } from "../redux/actions/postActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
   root: {

@@ -10,47 +10,37 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
     flexGrow: 1
   },
   card: {
-    width: 320
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
-  actions: {
-    display: "flex"
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    }),
-    marginLeft: "auto",
-    [theme.breakpoints.up("sm")]: {
-      marginRight: -8
-    }
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
+    width: "100%"
   },
   avatar: {
-    backgroundColor: "turquoise"
+    backgroundColor: "chocolate"
   }
 });
 
 class SimpleAppBar extends React.Component {
   handleCardArea = () => {};
+
+  postCount = () => {
+    return this.props.posts.filter(post => {
+      console.log(post.profile, this.props.profile._id);
+      return post.profile === this.props.profile._id;
+    }).length;
+  };
+
+  likeCount = () => {
+    return this.props.posts.forEach(post => {
+      post.likes.filter(like => {
+        return like.profile === this.props.profile._id;
+      });
+    }).length;
+  };
 
   render() {
     const { classes } = this.props;
@@ -64,52 +54,24 @@ class SimpleAppBar extends React.Component {
           >
             <CardHeader
               avatar={
-                <Avatar aria-label="Post" className={classes.avatar}>
+                <Avatar aria-label="Profile" className={classes.avatar}>
                   T
                 </Avatar>
               }
-              title={this.props.userName}
-              subheader="something"
+              title={this.props.profile.userName}
+              subheader={this.props.user.name}
             />
-            {this.props.imgUrl ? (
-              <CardMedia
-                className={classes.media}
-                image={this.props.imgUrl}
-                title="Dogs"
-              />
-            ) : null}
             <CardContent>
-              <Typography component="p">
-                <strong>{this.props.userName}: </strong>
-                {this.props.content}
-              </Typography>
+              <Typography variant="body2">0 Furiends</Typography>
+              <Typography variant="body2">{this.postCount()} Posts</Typography>
+              <Typography variant="body2">0 Likes</Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Comment" onClick={this.handleCommentClick}>
-              <ChatBubbleOutlineIcon />
-            </IconButton>
 
-            {/* TODO: stretch goal share feature
-          <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton> */}
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
           <CardContent>
             <Typography paragraph variant="body2">
-              {this.props.comments ? this.props.comments.length : 0} Comments
+              Bio: {this.props.profile.bio}
             </Typography>
-            {this.renderComments()}
           </CardContent>
         </Card>
       </div>
@@ -121,4 +83,10 @@ SimpleAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SimpleAppBar);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  profile: state.profile.profile,
+  posts: state.post.posts
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(SimpleAppBar));

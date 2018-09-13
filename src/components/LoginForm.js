@@ -12,6 +12,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logInUser } from "../redux/actions/authActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const styles = theme => ({
   layout: {
@@ -74,7 +75,12 @@ class LoginForm extends React.Component {
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Avatar>Placeholder</Avatar>
+            {/* <FontAwesomeIcon
+              icon="paw"
+              size="4x"
+              style={{ color: "chocolate" }}
+            /> */}
+
             <form className={classes.form}>
               <FormControl
                 margin="normal"
@@ -113,12 +119,15 @@ class LoginForm extends React.Component {
               <Button
                 type="submit"
                 fullWidth
-                variant="outlined"
-                color="primary"
+                style={{ color: "chocolate" }}
                 className={classes.submit}
                 onClick={this.handleClick}
               >
-                Log In
+                <FontAwesomeIcon
+                  icon="paw"
+                  size="4x"
+                  style={{ color: "chocolate" }}
+                />
               </Button>
             </form>
           </Paper>

@@ -11,6 +11,7 @@ import {
   createCommentAction,
   closeCommentDialogAction
 } from "../redux/actions/commentActions";
+import { clearErrorsAction } from "../redux/actions/postActions";
 import { withRouter } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -50,6 +51,7 @@ class CommentDialog extends React.Component {
 
   handleClose = () => {
     this.props.closeCommentDialogAction();
+    this.props.clearErrorsAction();
   };
 
   render() {
@@ -106,6 +108,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createCommentAction, closeCommentDialogAction }
+    { createCommentAction, closeCommentDialogAction, clearErrorsAction }
   )(CommentDialog)
 );

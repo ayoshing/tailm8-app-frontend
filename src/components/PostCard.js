@@ -144,7 +144,7 @@ class PostCard extends React.Component {
             <CardHeader
               avatar={
                 <Avatar aria-label="Post" className={classes.avatar}>
-                  T
+                  {this.props.userName.charAt(0)}
                 </Avatar>
               }
               action={

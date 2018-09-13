@@ -149,31 +149,6 @@ class ProfileForm extends React.Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
-
-              <DatePickers onChange={this.handleChange} />
-              <GenderRadioButton onChange={this.handleChange} />
-              <PhoneTextField onChange={this.getPhone} />
-
-              <FormControl margin="normal" fullWidth>
-                <InputLabel htmlFor="location">Location</InputLabel>
-                <Input
-                  name="location"
-                  id="location"
-                  value={this.state.location}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-
-              <FormControl margin="normal" fullWidth>
-                <InputLabel htmlFor="website">Website</InputLabel>
-                <Input
-                  name="website"
-                  id="website"
-                  value={this.state.website}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="bio">Bio</InputLabel>
                 <Input
@@ -181,8 +156,13 @@ class ProfileForm extends React.Component {
                   id="bio"
                   value={this.state.bio}
                   onChange={this.handleChange}
+                  rows={3}
+                  multiline
                 />
               </FormControl>
+
+              <DatePickers onChange={this.handleChange} />
+              <GenderRadioButton onChange={this.handleChange} />
 
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="instagram">Instagram</InputLabel>
@@ -214,6 +194,27 @@ class ProfileForm extends React.Component {
                 />
               </FormControl>
 
+              <PhoneTextField onChange={this.getPhone} />
+
+              <FormControl margin="normal" fullWidth>
+                <InputLabel htmlFor="location">Location</InputLabel>
+                <Input
+                  name="location"
+                  id="location"
+                  value={this.state.location}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+
+              <FormControl margin="normal" fullWidth>
+                <InputLabel htmlFor="website">Website</InputLabel>
+                <Input
+                  name="website"
+                  id="website"
+                  value={this.state.website}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
               <Button
                 type="submit"
                 fullWidth

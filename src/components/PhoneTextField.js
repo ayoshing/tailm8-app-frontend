@@ -41,6 +41,7 @@ function TextMaskCustom(props) {
       ]}
       placeholderChar={"\u2000"}
       showMask
+      guide={false}
     />
   );
 }
@@ -51,7 +52,7 @@ TextMaskCustom.propTypes = {
 
 class FormattedInputs extends React.Component {
   state = {
-    phone: "(1  )    -    "
+    phone: ""
   };
 
   handleChange = name => event => {
