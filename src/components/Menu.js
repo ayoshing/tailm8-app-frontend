@@ -40,14 +40,14 @@ const Menu = props => {
             </ListItemIcon>
             <ListItemText primary="Avatar" />
           </ListItem>
-          <Link to="/profile/edit" style={{ textDecoration: "none" }}>
-            <ListItem button>
-              <ListItemIcon>
-                <StarIcon />
-              </ListItemIcon>
-              <ListItemText primary={props.userName} />
-            </ListItem>
-          </Link>
+          {/* <Link to="/profile/edit" style={{ textDecoration: "none" }}> */}
+          <ListItem button component={Link} to="/profile">
+            <ListItemIcon>
+              <StarIcon />
+            </ListItemIcon>
+            <ListItemText primary={props.userName} />
+          </ListItem>
+          {/* </Link> */}
         </div>
       </List>
       <Divider />

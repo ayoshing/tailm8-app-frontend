@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Header from "./components/Header";
+import ProfileForm from "./components/ProfileForm";
 import SignUpPage from "./views/SignUpPage";
 import MainPage from "./views/MainPage";
-import ProfileForm from "./components/ProfileForm";
 import TestPage from "./views/TestPage";
+import ProfilePage from "./views/ProfilePage";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/signup" component={SignUpPage} />
+          {/* <Route exact path="/profile" component={ProfilePage} /> */}
           <Route exact path="/profile/edit" component={ProfileForm} />
           <Route exact path="/test" component={TestPage} />
           <Route exact path="/" component={MainPage} />

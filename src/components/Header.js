@@ -44,9 +44,9 @@ function SimpleAppBar(props) {
               <Grid item>
                 <IconButton
                   className={classes.menuButton}
-                  color="inherit"
                   aria-label="Menu"
                   onClick={handleClick}
+                  style={{ color: "chocolate" }}
                 >
                   <MenuIcon />
                 </IconButton>
@@ -54,7 +54,7 @@ function SimpleAppBar(props) {
             ) : null}
             <Grid item onClick={handleHome}>
               <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                <Typography variant="title" color="inherit">
+                <Typography variant="title" style={{ color: "chocolate" }}>
                   TAILM8
                 </Typography>
               </Link>

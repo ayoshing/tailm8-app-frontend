@@ -37,12 +37,10 @@ class SimpleBottomNavigation extends React.Component {
         className={classes.root}
       >
         <BottomNavigationAction
-          label={<span style={{ color: "turquoise" }}>Home</span>}
-          icon={
-            <Link to="/" style={{ color: "turquoise" }}>
-              <HomeIcon />
-            </Link>
-          }
+          component={Link}
+          to="/"
+          label={<span style={{ color: "chocolate" }}>Home</span>}
+          icon={<HomeIcon style={{ color: "chocolate" }} />}
         />
 
         {/* TODO: stretch feature priority: medium (after chat feature)
@@ -51,12 +49,10 @@ class SimpleBottomNavigation extends React.Component {
           icon={<NotificationsIcon />}
         /> */}
         <BottomNavigationAction
-          label={<span style={{ color: "turquoise" }}>Furiends</span>}
-          icon={
-            <Link to="/test" style={{ color: "turquoise" }}>
-              <FavoriteIcon />
-            </Link>
-          }
+          component={Link}
+          to="/test"
+          label={<span style={{ color: "chocolate" }}>Furiends</span>}
+          icon={<FavoriteIcon style={{ color: "chocolate" }} />}
         />
       </BottomNavigation>
     );

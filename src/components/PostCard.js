@@ -20,8 +20,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { openCommentDialogAction } from "../redux/actions/commentActions";
-import { clickLikeAction } from "../redux/actions/postActions";
+import {
+  clickLikeAction,
+  deletePostAction
+} from "../redux/actions/postActions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   card: {
@@ -48,7 +52,7 @@ const styles = theme => ({
     transform: "rotate(180deg)"
   },
   avatar: {
-    backgroundColor: "turquoise"
+    backgroundColor: "chocolate"
   },
   "@media (min-width: 600px)": {
     card: {
@@ -86,7 +90,7 @@ class PostCard extends React.Component {
 
   handleDeletePost = e => {
     e.stopPropagation();
-    console.log("delete post");
+    this.props.deletePostAction(this.props._id, this.props.history);
     this.setState({ anchorEl: null });
   };
 
@@ -219,10 +223,11 @@ PostCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userId: state.auth.user.id
+  userId: state.auth.user.id,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { openCommentDialogAction, clickLikeAction }
-)(withStyles(styles)(PostCard));
+  { openCommentDialogAction, clickLikeAction, deletePostAction }
+)(withRouter(withStyles(styles)(PostCard)));

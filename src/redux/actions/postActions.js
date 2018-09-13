@@ -44,6 +44,39 @@ export const createPostAction = (postData, history) => dispatch => {
   });
 };
 
+export const deletePostAction = (postId, history) => dispatch => {
+  let config = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.jwt
+    }
+  };
+
+  return fetch(`${API_POSTS_URL}/${postId}`, config).then(res => {
+    if (res.status === 404 || res.status === 401) {
+      res.json().then(json => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: json
+        });
+        dispatch(openSnackBarAction(json.errors));
+      });
+    } else {
+      dispatch(clearErrorsAction());
+      res
+        .json()
+        .then(json => {
+          dispatch(openSnackBarAction("Post Deleted"));
+          history.push("/");
+        })
+        .then(json => {
+          dispatch(getPostsAction());
+        });
+    }
+  });
+};
+
 export const getPostsAction = () => dispatch => {
   fetch(API_POSTS_URL)
     // .then(res => {
