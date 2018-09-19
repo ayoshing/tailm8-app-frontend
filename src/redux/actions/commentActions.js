@@ -38,6 +38,7 @@ export const createCommentAction = (
         .json()
         .then(json => {
           dispatch(openSnackBarAction("Comment Added"));
+          dispatch(closeCommentDialogAction());
         })
         .then(json => dispatch(getPostsAction()));
     }

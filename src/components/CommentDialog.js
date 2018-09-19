@@ -37,21 +37,16 @@ class CommentDialog extends React.Component {
       .createCommentAction(commentData, this.props.postId, this.props.history)
       .then(res => {
         if (!this.props.errors.content) {
-          this.setState(
-            {
-              content: ""
-            },
-            () => {
-              this.props.closeCommentDialogAction();
-            }
-          );
+          this.setState({
+            content: ""
+          });
         }
       });
   };
 
   handleClose = () => {
-    this.props.closeCommentDialogAction();
     this.props.clearErrorsAction();
+    this.props.closeCommentDialogAction();
   };
 
   render() {
