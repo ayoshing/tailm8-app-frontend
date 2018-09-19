@@ -46,15 +46,10 @@ class PostDialog extends React.Component {
 
     this.props.createPostAction(postData, this.props.history).then(res => {
       if (isEmpty(this.props.errors)) {
-        this.setState(
-          {
-            content: "",
-            imgUrl: ""
-          },
-          () => {
-            this.props.closeDialogAction();
-          }
-        );
+        this.setState({
+          content: "",
+          imgUrl: ""
+        });
       }
     });
   };

@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -21,6 +22,12 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: "chocolate"
+  },
+  paper: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    marginBottom: 50
   }
 });
 
@@ -29,17 +36,22 @@ class SimpleAppBar extends React.Component {
 
   postCount = () => {
     return this.props.posts.filter(post => {
-      console.log(post.profile, this.props.profile._id);
       return post.profile === this.props.profile._id;
     }).length;
   };
 
   likeCount = () => {
-    return this.props.posts.forEach(post => {
-      post.likes.filter(like => {
-        return like.profile === this.props.profile._id;
+    let likes = [];
+
+    this.props.posts.forEach(post => {
+      post.likes.forEach(like => {
+        if (like.profile === this.props.profile._id) {
+          likes.push(like);
+        }
       });
-    }).length;
+    });
+
+    return likes.length;
   };
 
   render() {
@@ -47,33 +59,39 @@ class SimpleAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Card className={classes.card}>
-          <CardActionArea
-            className={classes.card}
-            onClick={this.handleCardArea}
-          >
-            <CardHeader
-              avatar={
-                <Avatar aria-label="Profile" className={classes.avatar}>
-                  T
-                </Avatar>
-              }
-              title={this.props.profile.userName}
-              subheader={this.props.user.name}
-            />
-            <CardContent>
-              <Typography variant="body2">0 Furiends</Typography>
-              <Typography variant="body2">{this.postCount()} Posts</Typography>
-              <Typography variant="body2">0 Likes</Typography>
-            </CardContent>
-          </CardActionArea>
+        <Paper className={classes.paper} elevation={0}>
+          <Card className={classes.card}>
+            <CardActionArea
+              className={classes.card}
+              onClick={this.handleCardArea}
+            >
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="Profile" className={classes.avatar}>
+                    T
+                  </Avatar>
+                }
+                title={this.props.profile.userName}
+                subheader={this.props.user.name}
+              />
+              <CardContent>
+                <Typography variant="body2">0 Furiends</Typography>
+                <Typography variant="body2">
+                  {this.postCount()} Posts
+                </Typography>
+                <Typography variant="body2">
+                  {this.likeCount()} Likes
+                </Typography>
+              </CardContent>
+            </CardActionArea>
 
-          <CardContent>
-            <Typography paragraph variant="body2">
-              Bio: {this.props.profile.bio}
-            </Typography>
-          </CardContent>
-        </Card>
+            <CardContent>
+              <Typography paragraph variant="body2">
+                Bio: {this.props.profile.bio}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Paper>
       </div>
     );
   }

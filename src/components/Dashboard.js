@@ -5,7 +5,7 @@ import SnackBar from "./SnackBar";
 import PostDialog from "./PostDialog";
 import CommentDialog from "./CommentDialog";
 import Navigation from "./Navigation";
-import PostCardContainer from "../views/PostCardContainer";
+import PostCardContainer from "./PostCardContainer";
 import ProfileForm from "./ProfileForm";
 import Loading from "./Loading";
 import SpeedDials from "./SpeedDials";

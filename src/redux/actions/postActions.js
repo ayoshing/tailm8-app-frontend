@@ -35,6 +35,7 @@ export const createPostAction = (postData, history) => dispatch => {
         .json()
         .then(json => {
           dispatch(openSnackBarAction("Post Success"));
+          dispatch(closeDialogAction());
           history.push("/");
         })
         .then(json => {
