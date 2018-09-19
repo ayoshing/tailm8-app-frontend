@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  postComments: [],
+  comments: [],
   dialogOpen: false,
   postId: ""
 };

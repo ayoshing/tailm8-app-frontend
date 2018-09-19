@@ -48,12 +48,12 @@ class SimpleBottomNavigation extends React.Component {
           label="Notifications"
           icon={<NotificationsIcon />}
         /> */}
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           component={Link}
           to="/test"
           label={<span style={{ color: "chocolate" }}>Furiends</span>}
           icon={<FavoriteIcon style={{ color: "chocolate" }} />}
-        />
+        /> */}
       </BottomNavigation>
     );
   }

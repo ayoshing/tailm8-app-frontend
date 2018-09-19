@@ -20,6 +20,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { openCommentDialogAction } from "../redux/actions/commentActions";
+import { requestFriendAction } from "../redux/actions/friendshipActions";
 import {
   clickLikeAction,
   deletePostAction
@@ -96,7 +97,7 @@ class PostCard extends React.Component {
 
   handleAddFriend = e => {
     e.stopPropagation();
-    console.log("add friend");
+    this.props.requestFriendAction(this.props.profile);
     this.setState({ anchorEl: null });
   };
 
@@ -229,5 +230,10 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { openCommentDialogAction, clickLikeAction, deletePostAction }
+  {
+    openCommentDialogAction,
+    clickLikeAction,
+    deletePostAction,
+    requestFriendAction
+  }
 )(withRouter(withStyles(styles)(PostCard)));

@@ -27,7 +27,10 @@ export const CLOSE_COMMENT_DIALOG = "CLOSE_COMMENT_DIALOG";
 export const OPEN_COMMENT_SNACKBAR = "OPEN_COMMENT_SNACKBAR";
 export const COMMENT_LOADING = "COMMENT_LOADING";
 
-// likeReducer actions
-export const CLICK_LIKE = "CLICK_LIKE";
+// friendshipReducer actions
+export const GET_FRIENDS = "GET_FRIENDS";
 
 export const RESET = "RESET";
+
+// // likeReducer actions
+// export const CLICK_LIKE = "CLICK_LIKE";
