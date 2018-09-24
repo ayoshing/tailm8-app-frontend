@@ -13,6 +13,10 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 
 class App extends Component {
+  state = {
+    timestamp: ""
+  };
+
   render() {
     return (
       <Fragment>
