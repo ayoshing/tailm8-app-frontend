@@ -2,7 +2,11 @@
 
 > Your pet's social network.
 
-One to two paragraph statement about your product and what it does.
+TailM8 was created with your furry friends in mind. Our dogs are just like us, they like to play with their friends. Whenever I bring my dogs to the park, I realize they always enjoy playing with a specific few other dogs. When they're not around, they would just sniff around the park or hangout by me. I figured if they rather chill with me at the park, then I could've just stayed home.
+
+I wanted my dogs to have fun too, so I created TailM8, an online network catered to my two dogs, where I can get updates on their pet friends and schedule playdates with 'their' pet friends.
+
+This project will be an ongoing project, with new features to be added and improvements to be made. TailM8 was built with the MERN stack, using Node.js + Express for the backend to allow real-time data connections and modularity. The frontend uses React and Redux, so that I can create reusable components and also take advantage of React's Virtual DOM for efficiency reasons.
 
 ## Installation
 
@@ -10,10 +14,6 @@ One to two paragraph statement about your product and what it does.
 npm install
 npm start
 ```
-
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
 ## Release History
 
