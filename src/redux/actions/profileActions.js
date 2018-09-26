@@ -6,7 +6,7 @@ import {
   GET_ERRORS
 } from "./types";
 
-const API_PROFILE_URL = "http://localhost:3001/api/profile";
+const API_PROFILE_URL = "https://tailm8-api.herokuapp.com/api/profile";
 
 export const createProfile = (profileData, history) => dispatch => {
   let config = {

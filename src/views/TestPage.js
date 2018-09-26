@@ -43,7 +43,6 @@ class TestPage extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(newMessage());
 
     return (
       <Grid container alignItems="center">
