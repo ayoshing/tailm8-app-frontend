@@ -23,31 +23,11 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/signup"}
-            component={SignUpPage}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/profile"}
-            component={ProfilePage}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/profile/edit"}
-            component={ProfileForm}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/test"}
-            component={TestPage}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/"}
-            component={MainPage}
-          />
+          <Route exact path={"/signup"} component={SignUpPage} />
+          <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/profile/edit" component={ProfileForm} />
+          <Route exact path="/test" component={TestPage} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </Fragment>
     );
