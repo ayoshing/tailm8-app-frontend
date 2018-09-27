@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { createMessage, newMessage } from "../api";
+// import { createMessage, newMessage } from "../api";
 
 const styles = theme => ({
   container: {
@@ -38,7 +38,7 @@ class TestPage extends Component {
 
   handleSend = e => {
     e.preventDefault();
-    createMessage(this.state.message);
+    // createMessage(this.state.message);
   };
 
   render() {
