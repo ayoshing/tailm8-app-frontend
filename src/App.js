@@ -23,11 +23,11 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route path={"/signup"} component={SignUpPage} />
-          <Route path="/profile" component={ProfilePage} />
-          <Route path="/profile/edit" component={ProfileForm} />
-          <Route path="/test" component={TestPage} />
-          <Route path="/" component={MainPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/profile/edit" component={ProfileForm} />
+          <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/test" component={TestPage} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </Fragment>
     );

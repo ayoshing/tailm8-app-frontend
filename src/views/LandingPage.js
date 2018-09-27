@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import LoginForm from "../components/LoginForm";
+import { Link } from "react-router-dom";
 
 export default class extends Component {
   render() {
@@ -20,7 +21,8 @@ export default class extends Component {
           <Button
             variant="contained"
             color="primary"
-            href="/signup"
+            component={Link}
+            to="/signup"
             style={{ marginTop: 50, backgroundColor: "chocolate" }}
           >
             Create An Account
