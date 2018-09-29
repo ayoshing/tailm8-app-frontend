@@ -83,7 +83,6 @@ class PostDialog extends React.Component {
             >
               <Input
                 autoFocus
-                // margin="dense"
                 id="content"
                 placeholder="Bark, Meow, Moo..."
                 fullWidth

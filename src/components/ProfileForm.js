@@ -20,7 +20,7 @@ import MenuDrawer from "./MenuDrawer";
 const styles = theme => ({
   layout: {
     width: "auto",
-    display: "block", // Fix IE11 issue.
+    display: "block",
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -38,7 +38,7 @@ const styles = theme => ({
       .spacing.unit * 3}px`
   },
   form: {
-    width: "100%", // Fix IE11 issue.
+    width: "100%",
     marginTop: theme.spacing.unit
   },
   submit: {

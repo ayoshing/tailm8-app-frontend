@@ -34,13 +34,7 @@ function SimpleAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <Grid
-            container
-            spacing={16}
-            alignItems="center"
-            // justify="flex-end"
-            direction="row"
-          >
+          <Grid container spacing={16} alignItems="center" direction="row">
             {localStorage.jwt ? (
               <Grid item>
                 <IconButton

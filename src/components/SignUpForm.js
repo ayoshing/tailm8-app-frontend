@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,17 +10,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { connect } from "react-redux";
-import { signUpUser } from "../redux/actions/authActions";
-import { withRouter } from "react-router-dom";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import withStyles from "@material-ui/core/styles/withStyles";
+import { signUpUser } from "../redux/actions/authActions";
 import { clearErrorsAction } from "../redux/actions/postActions";
 
 const styles = theme => ({
   layout: {
     width: "auto",
-    display: "block", // Fix IE11 issue.
+    display: "block",
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -36,7 +36,7 @@ const styles = theme => ({
       .spacing.unit * 3}px`
   },
   form: {
-    width: "100%", // Fix IE11 issue.
+    width: "100%",
     marginTop: theme.spacing.unit
   },
   submit: {

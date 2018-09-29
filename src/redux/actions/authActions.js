@@ -66,12 +66,6 @@ export const getCurrentUser = () => dispatch => {
   };
 
   fetch(`${API_USERS_URL}/current`, config)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error("Can't fetch current user");
-    // })
     .then(res => res.json())
     .then(json => dispatch(setCurrentUser(json)));
 };

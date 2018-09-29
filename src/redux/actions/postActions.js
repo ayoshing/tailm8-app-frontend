@@ -80,12 +80,6 @@ export const deletePostAction = (postId, history) => dispatch => {
 
 export const getPostsAction = () => dispatch => {
   fetch(API_POSTS_URL)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error("Unable To Get Posts");
-    // })
     .then(res => res.json())
     .then(json => {
       dispatch({
@@ -132,12 +126,6 @@ export const clickLikeAction = postId => dispatch => {
   };
 
   fetch(`${API_POSTS_URL}/${postId}/likes`, config)
-    // .then(res => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   throw new Error("Post Error");
-    // })
     .then(res => res.json())
     .then(json => dispatch(getPostsAction()));
 };

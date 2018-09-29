@@ -24,7 +24,7 @@ const styles = theme => ({
 
 const actions = [
   { icon: <CreateIcon />, name: "Post" }
-  // { icon: <ChatIcon />, name: "Chat" }
+  // TODO: stretch feature priority: medium { icon: <ChatIcon />, name: "Chat" }
   // TODO: stretch feature priority: medium { icon: <EventIcon />, name: "Event" }
 ];
 
@@ -116,13 +116,6 @@ class SpeedDials extends React.Component {
 SpeedDials.propTypes = {
   classes: PropTypes.object.isRequired
 };
-//
-// const mapStateToProps = state => ({
-//   auth: state.auth,
-//   profile: state.profile,
-//   post: state.post,
-//   errors: state.errors
-// });
 
 export default connect(
   null,
