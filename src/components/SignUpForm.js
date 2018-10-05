@@ -159,7 +159,7 @@ class SignUpForm extends React.Component {
                 <FormHelperText error>{errors.password2}</FormHelperText>
               </FormControl>
 
-              <FormControl className={classes.formControl}>
+              {/* <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="accountType">Account Type</InputLabel>
                 <Select
                   value={this.state.accountType}
@@ -174,7 +174,7 @@ class SignUpForm extends React.Component {
                   </MenuItem>
                   <MenuItem value="Business">Business</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
 
               <Button
                 type="submit"
