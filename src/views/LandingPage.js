@@ -3,8 +3,14 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import LoginForm from "../components/LoginForm";
 import { Link } from "react-router-dom";
+import { clearErrorsAction } from "../redux/actions/postActions";
+import { connect } from "react-redux";
 
-export default class extends Component {
+class LandingPage extends Component {
+  handleClick = () => {
+    this.props.clearErrorsAction();
+  };
+
   render() {
     return (
       <Grid
@@ -24,6 +30,7 @@ export default class extends Component {
             component={Link}
             to="/signup"
             style={{ marginTop: 50, backgroundColor: "chocolate" }}
+            onClick={this.handleClick}
           >
             Create An Account
           </Button>
@@ -32,3 +39,8 @@ export default class extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { clearErrorsAction }
+)(LandingPage);
